@@ -1,3 +1,6 @@
 哈囉
 str = "哈羅"
 print(str)
+def myfunction() {
+	print("hello world")
+}
