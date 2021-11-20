@@ -1,6 +1,11 @@
-哈囉
+你好
 str = "哈羅"
+
 print(str)
 def myfunction() {
 	print("hello world")
 }
+
+123456
+
+123456
