@@ -21,6 +21,7 @@
 		
 		<input type="submit" value="送出修改">
 		<input id="cancel" type="button" value="取消">
+		<button id="deleteAct" type="button">刪除</button>
 	</form>
 	<script>
 	// 使用者取消修改，返回至上一頁
@@ -31,6 +32,23 @@
 	});
 	
 	// 抓取使用者返回上一頁時候，給予提示視窗
+	
+	
+	
+	// 刪除功能
+	$("#deleteAct").click(function() {
+		let pid = ${product.id};
+		let act = confirm("您要刪除此商品嗎?");
+		const xhttp = new XMLHttpRequest();
+		if (act == true) {
+			alert("此商品已完成刪除");
+			xhttp.open("GET", "deleteProductServlet?pnum="+pid);
+			xhttp.send();
+			location.replace("listAllProductServlet");
+		}
+	});
+	
+	
 	</script>
 </body>
 </html>

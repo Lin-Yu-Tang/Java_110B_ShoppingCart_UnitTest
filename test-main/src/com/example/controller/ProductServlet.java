@@ -55,10 +55,10 @@ public class ProductServlet extends HttpServlet {
 			
 			System.out.println(items.size());
 			
-			String name = items.get(0).getString();
+			String name = items.get(0).getString("UTF-8");
 			String price = items.get(1).getString();
 			InputStream pictureIs = items.get(2).getInputStream();
-			String desc = items.get(3).getString();
+			String desc = items.get(3).getString("UTF-8");
 			
 			// pass data to model
 			Product tempProduct = new Product();
@@ -89,7 +89,7 @@ public class ProductServlet extends HttpServlet {
 			    
 			    if (item.isFormField()) {
 			        String names = item.getFieldName();
-			        String values = item.getString();
+			        String values = item.getString("UTF-8");
 			        System.out.println("name: " + names +", value: " +values);
 			    }else {
 			    	String fieldName = item.getFieldName();

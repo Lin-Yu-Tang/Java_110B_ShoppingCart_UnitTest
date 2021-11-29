@@ -1,9 +1,16 @@
 package com.example.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,20 +22,19 @@ import com.example.model.Product;
 /**
  * Servlet implementation class ListAllProductServlet
  */
-@WebServlet("/ListAllProductServlet")
+@WebServlet("/listAllProductServlet")
 public class ListAllProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
-		
 		ArrayList<Product> listAllProduct = productService.ListAllProduct();
+		response.setContentType("text/html;charset=UTF-8");
 		
-		for (Product p:listAllProduct) {
-			System.out.println(p);
-		}
+		request.setAttribute("allProducts", listAllProduct);
 		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/displayProducts.jsp");
 		
-		
+		dispatcher.forward(request, response);
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

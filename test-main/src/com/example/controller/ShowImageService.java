@@ -25,20 +25,23 @@ import com.example.model.Product;
 public class ShowImageService extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pnum = Integer.valueOf(request.getParameter("pnum"));
-		ProductServiceImpl productService = new ProductServiceImpl();
-		ArrayList<Product> listAllProduct = productService.ListAllProduct();
-//		response.setContentType("text/html;charset=UTF-8");
+		String pnum = request.getParameter("pnum");
+		ProductServiceImpl service = new ProductServiceImpl();
+		Product product = service.selectOneProduct(pnum);
 		response.setContentType("image/png");
-		Blob picture = listAllProduct.get(pnum-1).getPicture();
+		Blob picture = product.getPicture();
+		ServletOutputStream outputStream = null;
 		try {
 			InputStream binaryStream = picture.getBinaryStream();
 			BufferedImage bi = ImageIO.read(binaryStream);
-			ServletOutputStream outputStream = response.getOutputStream();
+			outputStream = response.getOutputStream();
 			ImageIO.write(bi, "png", outputStream);
 			outputStream.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if (outputStream != null)
+				outputStream.close();
 		}
 	}
 
