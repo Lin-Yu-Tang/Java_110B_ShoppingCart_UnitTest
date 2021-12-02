@@ -28,11 +28,11 @@ public class LoginDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 
-				String pwd = rs.getString("password");// §ä¨ì¸ê®ÆÃş¸Ì­±user©Ò¹ïÀ³ªºpasswrod
-				if (pwd.equals(password)) {// §â§Ú­Ì±q¸ê®Æ®w¤¤§ä¥X¨Óªºpassword©M±qjsp¤¤¶Ç¹L¨Óªºpasswrod¤ñ¸û
-					return true; // ture¥NªíÅçÃÒ¦¨¥\
+				String pwd = rs.getString("password");// æ‰¾åˆ°è³‡æ–™é¡è£¡é¢useræ‰€å°æ‡‰çš„passwrod
+				if (pwd.equals(password)) {// æŠŠæˆ‘å€‘å¾è³‡æ–™åº«ä¸­æ‰¾å‡ºä¾†çš„passwordå’Œå¾jspä¸­å‚³éä¾†çš„passwrodæ¯”è¼ƒ
+					return true; // tureä»£è¡¨é©—è­‰æˆåŠŸ
 				} else {
-					return false;// false¥NªíÅçÃÒ¥¢±Ñ
+					return false;// falseä»£è¡¨é©—è­‰å¤±æ•—
 				}
 			} else {
 				return false;
@@ -40,7 +40,7 @@ public class LoginDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally { // ³o¸Ì¬O¤@¨Ç¾Ş§@¸ê®Æ®w¤§«áªº¤@¨ÇÃö³¬¾Ş§@
+		} finally { // é€™è£¡æ˜¯ä¸€äº›æ“ä½œè³‡æ–™åº«ä¹‹å¾Œçš„ä¸€äº›é—œé–‰æ“ä½œ
 			if (rs != null) {
 				try {
 					rs.close();

@@ -10,7 +10,7 @@ public class UserDao {
 		String USER = "root";
 		String PASSWD = "123456";
 		String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-		//�X�ʰѼ�
+		//驅動參數
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String SQL_INSERT = "INSERT INTO test.user(username, password) VALUES(?,?)";
