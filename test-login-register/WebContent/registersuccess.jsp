@@ -11,14 +11,7 @@
 <form action="" method="post">
 <h2>註冊成功!!</h2>
 
-<table>
-				<tr>
-					<td><a href="login.jsp">返回登入畫面</td>
-				</tr>
-			</table>
-
-
-</form>
+<a href="login.jsp">返回登入畫面</a>
 
 
 </div>

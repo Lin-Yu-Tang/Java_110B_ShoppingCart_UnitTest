@@ -1,0 +1,8 @@
+create database if not exists `shopping-cart-test`;
+CREATE TABLE `shopping-cart-test`.`user` (
+  `username` VARCHAR(250) NOT NULL,
+  `password` VARCHAR(45) NULL,
+  PRIMARY KEY (`username`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci;
