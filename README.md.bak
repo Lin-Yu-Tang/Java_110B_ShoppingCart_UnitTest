@@ -13,6 +13,23 @@
 ### 文件編碼
 *.java, *.html, *.jsp *.xml, *.css *.js 請用UTF-8編寫
 
+### 文件註解
+1. .java的文件註解範例:
+```java=
+import java.sql.*;
+/**
+ * 
+ * @author Tom Lin
+ * @apiNote 文件大綱
+ */
+public class HelloWorld {
+....
+```
+2. .jsp/.html文件註解範例:
+```html=
+<meta name="author" content="Tom Lin">
+```
+
 ### 資料庫檔案
 請放置於WebContent/WEB-INF/src/資料夾內，副檔名可用.script與.txt
 資料庫建置統一使用資料庫名稱為: shopping-cart-test
@@ -33,7 +50,7 @@ test-系統名稱，單字全為小寫並用-符號隔開，例如登入系統: 
 第一個字母小寫，採駝峰法命名
 
 #### 其他檔案與資料夾
-均以第一個字母小寫，採駝峰法命名
+均以第一個字母小寫，採駝峰法命名或以全小寫以-符號分隔各單字
 
 JavaBean請放置於Java Resources/src/com.example.model
 檔案命名規則: 
