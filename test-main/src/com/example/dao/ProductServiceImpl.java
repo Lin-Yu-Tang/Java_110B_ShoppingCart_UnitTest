@@ -140,15 +140,26 @@ public class ProductServiceImpl implements ProductService {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (pstmt != null) {
+				try {
+				pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn !=null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return tempProduct;

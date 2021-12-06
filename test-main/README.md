@@ -22,4 +22,17 @@ ShowImageService 取出資料方法要修改為只取出圖片
 1. 由ListAllProductServlet進入至displayProducts.jsp列出所有商品內容
 2. 加入刪除連結將欲刪除的商品傳送到DeleteProductServlet執行刪除
 3. 加入javascript 提示視窗，再次確認是否要刪除
-editProduct.jsp 一樣要加入有刪除功能
+4. editProduct.jsp已經加入刪除功能
+displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProductServlet
+仍然抓的到被刪除商品的資訊，但找不到圖檔
+
+
+
+## 首頁
+1. HomePageServlet -> homePage.jsp
+
+
+## 個別商品頁面
+1. HomePageServlet -> ProductInfoServlet -> productInfo.jsp
+
+

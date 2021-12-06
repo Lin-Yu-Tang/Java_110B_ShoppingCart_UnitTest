@@ -15,14 +15,14 @@ import com.example.dao.ProductServiceImpl;
  * Servlet implementation class deleteProductServlet
  */
 @WebServlet("/deleteProductServlet")
-public class deleteProductServlet extends HttpServlet {
+public class DeleteProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl service = new ProductServiceImpl();
 		request.setCharacterEncoding("UTF-8");
 		String pnum = request.getParameter("pnum");
 		System.out.println("deleteProductServlet!! ID = " + pnum);
-//		service.deleteProdct(pid);
+		service.deleteProdct(pnum);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

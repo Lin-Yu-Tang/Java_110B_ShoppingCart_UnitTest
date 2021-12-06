@@ -29,7 +29,7 @@
 			<td><img src="showImage?pnum=${product.id}" width="300" height="500"></td>
 			<td>${product.description}</td>
 			<td><a href="editProductServlet?pnum=${product.id}" >修改</a></td>
-			<td><button id="deleteAct" type="button">刪除</button></td>
+			<td><button onclick="selectButton(this.value)" value="${product.id}" type="button">刪除</button></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -37,16 +37,17 @@
 	<script>
 	// 刪除功能(未完成)
 	{
-	$(".deleteAct").click(function() {
-		let act = confirm("您要刪除此商品嗎?");
+	function selectButton(theValue) {
+		let act = confirm("您要刪除此商品嗎? (ID = " + theValue + ")" );
 		const xhttp = new XMLHttpRequest();
 		if (act == true) {
 			alert("此商品已完成刪除");
-			//xhttp.open("GET", "deleteProductServlet?pnum="+pid);
-			//xhttp.send();
+			xhttp.open("GET", "deleteProductServlet?pnum="+theValue);
+			xhttp.send();
 			location.replace("listAllProductServlet");
 		}
-	});
+		
+	}
 	}
 	</script>
 </body>
