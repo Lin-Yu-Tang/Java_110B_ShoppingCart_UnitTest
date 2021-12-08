@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>z-test-jsp-urlmapping</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <servlet>
+  	<servlet-name>Hello</servlet-name>
+  	<jsp-file>/hello.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Hello</servlet-name>
+  	<url-pattern>/youdontknow</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Hello.html</servlet-name>
+  	<jsp-file>/hello.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Hello.html</servlet-name>
+  	<url-pattern>/hellohtml</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>MainMenu</servlet-name>
+  	<jsp-file>/WEB-INF/view/main-menu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MainMenu</servlet-name>
+  	<url-pattern>/main-menu</url-pattern>
+  </servlet-mapping>
+</web-app>
