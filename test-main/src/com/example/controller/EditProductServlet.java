@@ -13,7 +13,9 @@ import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
 /**
- * Servlet implementation class EditProductServlet
+ * 
+ * @author Tom Lin
+ * @apiNote forward to editProduct.jsp
  */
 @WebServlet("/editProductServlet")
 public class EditProductServlet extends HttpServlet {

@@ -1,15 +1,19 @@
 package com.example.dao;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 
 import com.example.model.Product;
+
+/**
+ * 
+ * @author Tom Lin
+ * @apiNote 實作商品相關的服務(crud)
+ */
 
 public class ProductServiceImpl implements ProductService {
 	// 資料庫內容
@@ -17,12 +21,18 @@ public class ProductServiceImpl implements ProductService {
 	private final String USER = "root";
 	private final String PASSWD = "root";
 	private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-			
+	
+	
+	/**
+	 * 新增商品，存入資料庫
+	 */
 	@Override
 	public void saveProduct(Product tempProduct) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String SQL_INSERT = "INSERT INTO product(name,picture,price,description) VALUES(?,?,?,?)"; 
+		String SQL_INSERT = "INSERT INTO "
+				+ "product(name,picture,price,quantity,seller_id,description) "
+				+ "VALUES(?,?,?,?,?,?)"; 
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
@@ -32,7 +42,9 @@ public class ProductServiceImpl implements ProductService {
 			pstmt.setString(1, tempProduct.getName());
 			pstmt.setBlob(2, tempProduct.getPicture());
 			pstmt.setInt(3, tempProduct.getPrice());
-			pstmt.setString(4, tempProduct.getDescription());
+			pstmt.setInt(4, tempProduct.getQuantity());
+			pstmt.setInt(5, Integer.parseInt(tempProduct.getSeller_id()));
+			pstmt.setString(6, tempProduct.getDescription());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -57,14 +69,18 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 	}
-
+	/**
+	 * 取得商品所有欄位
+	 */
 	@Override
 	public ArrayList<Product> ListAllProduct() {
 		ArrayList<Product> list = new ArrayList<Product>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL_SELECT = "SELECT * FROM product";
+		String SQL_SELECT = "SELECT id, name, picture, "
+				+ "price, quantity, seller_id, description "
+				+ "FROM product";
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
@@ -76,6 +92,8 @@ public class ProductServiceImpl implements ProductService {
 				tempProduct.setName(rs.getString("name"));
 				tempProduct.setPicture(rs.getBlob("picture"));
 				tempProduct.setPrice(rs.getInt("price"));
+				tempProduct.setQuantity(rs.getInt("quantity"));
+				tempProduct.setSeller_id(Integer.toString(rs.getInt("seller_id")));
 				tempProduct.setDescription(rs.getString("description"));
 				list.add(tempProduct);
 			}
@@ -87,27 +105,33 @@ public class ProductServiceImpl implements ProductService {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				rs.close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return list;
 	}
 	
 	/**
-	 * 給定參數: id，回傳指定的產品
+	 * 給定參數: id，回傳指定的產品所有欄位
 	 */
 
 	@Override
@@ -116,7 +140,10 @@ public class ProductServiceImpl implements ProductService {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String SQL_SELECT = "SELECT * FROM product WHERE id = ?";
+		String SQL_SELECT = "SELECT id, name, picture, "
+				+ "price, quantity, seller_id, description "
+				+ "FROM product "
+				+ "WHERE id = ?";
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
@@ -130,6 +157,8 @@ public class ProductServiceImpl implements ProductService {
 				tempProduct.setName(rs.getString("name"));
 				tempProduct.setPicture(rs.getBlob("picture"));
 				tempProduct.setPrice(rs.getInt("price"));
+				tempProduct.setQuantity(rs.getInt("quantity"));
+				tempProduct.setSeller_id(Integer.toString(rs.getInt("seller_id")));
 				tempProduct.setDescription(rs.getString("description"));
 			}
 			rs.close();
@@ -164,19 +193,26 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return tempProduct;
 	}
-
+	/**
+	 * 更新商品
+	 */
+	
 	@Override
 	public void updateProduct(Product product) {
 		Connection conn = null;
 		PreparedStatement selectStmt = null;
 		PreparedStatement updateStmt = null;
-		String SQL_SELECT = "SELECT * FROM product WHERE id = ?";
+		String SQL_SELECT = "SELECT id, name, picture, "
+				+ "price, quantity, seller_id, description "
+				+ "FROM product "
+				+ "WHERE id = ?";
 		String SQL_UPDATE = "Update product set name = ? "
 				+ ", picture = ? "
 				+ ", price = ? "
+				+ ", quantity = ? "
+				+ ", seller_id = ? "
 				+ ", description = ? "
 				+ "WHERE id = ?";
-		
 		
 		try {
 			Class.forName(JDBC_DRIVER);
@@ -194,8 +230,11 @@ public class ProductServiceImpl implements ProductService {
 				updateStmt.setString(1, product.getName());
 				updateStmt.setBlob(2, product.getPicture());
 				updateStmt.setInt(3, product.getPrice());
-				updateStmt.setString(4, product.getDescription());
-				updateStmt.setInt(5, Integer.parseInt(product.getId()));
+				updateStmt.setInt(4, product.getQuantity());
+				updateStmt.setInt(5, Integer.parseInt(product.getSeller_id()));
+				updateStmt.setString(6, product.getDescription());
+				// where condition
+				updateStmt.setInt(7, Integer.parseInt(product.getId()));
 				updateStmt.executeUpdate();
 				conn.commit();
 			}
@@ -234,7 +273,7 @@ public class ProductServiceImpl implements ProductService {
 		Connection conn = null;
 		PreparedStatement selectStmt = null;
 		PreparedStatement deleteStmt = null;
-		String SQL_SELECT = "SELECT * FROM product WHERE id = ?";
+		String SQL_SELECT = "SELECT name FROM product WHERE id = ?";
 		String SQL_DELETE = "DELETE FROM product WHERE id = ?";
 		
 		
@@ -275,16 +314,26 @@ public class ProductServiceImpl implements ProductService {
 			}
 			e.printStackTrace();
 		}finally {
-			try {
-				selectStmt.close();
-				deleteStmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (selectStmt != null) {
+				try {
+					selectStmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (deleteStmt != null) {
+				try {
+					deleteStmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

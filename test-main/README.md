@@ -35,4 +35,7 @@ displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProduc
 ## 個別商品頁面
 1. HomePageServlet -> ProductInfoServlet -> productInfo.jsp
 
+## 購物車功能
+購物車類別: ShoppingCart, Service: ShoppingCartService
+1. productInfo.jsp -> 直接購買 -> ShoppingCartServlet -> shoppingCart.jsp
 

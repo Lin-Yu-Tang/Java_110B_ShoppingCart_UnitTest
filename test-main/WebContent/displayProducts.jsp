@@ -17,6 +17,7 @@
 		<tr>
 			<td>名稱</td>
 			<td>價格</td>
+			<td>數量</td>
 			<td>圖片</td>
 			<td>商品描述</td>
 			<td>修改</td>
@@ -26,6 +27,7 @@
 		<tr>
 			<td>${product.name}</td>
 			<td>${product.price}</td>
+			<td>${product.quantity}</td>
 			<td><img src="showImage?pnum=${product.id}" width="300" height="500"></td>
 			<td>${product.description}</td>
 			<td><a href="editProductServlet?pnum=${product.id}" >修改</a></td>

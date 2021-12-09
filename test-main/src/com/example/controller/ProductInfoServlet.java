@@ -26,7 +26,8 @@ public class ProductInfoServlet extends HttpServlet {
 		ProductServiceImpl service = new ProductServiceImpl();
 		String theId = request.getParameter("pnum");
 		Product theProduct = service.selectOneProduct(theId);
-		
+		int quantity_length = (""+theProduct.getQuantity()).length();
+		request.setAttribute("product_quantity_len", quantity_length);
 		request.setAttribute("product", theProduct);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("productInfo.jsp");

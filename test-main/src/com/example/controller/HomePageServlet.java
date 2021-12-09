@@ -14,7 +14,9 @@ import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
 /**
- * Servlet implementation class HomePageServlet
+ * 
+ * @author Tom Lin
+ * @apiNote forward to homePage.jsp
  */
 @WebServlet("")
 public class HomePageServlet extends HttpServlet {

@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="author" content="Tom Lin">
+<title>新增商品</title>
 <style>
 @import url("css/newProduct.css");
 
@@ -14,10 +15,11 @@
 <body>
 	<h1>新增商品</h1>
 	<div class="div1">
-	<form method="POST" action="productServlet" enctype="multipart/form-data">
+	<form method="POST" action="product" enctype="multipart/form-data">
 	<div class="div2">
 		<p>商品名稱: <input type="text" name="name" ></p>
 		<p>價格: <input type="text" name="price" ></p>
+		<p>數量: <input type="text" name="quantity" ></p>
 		<p>照片: <input type="file" name="picture" ></p>
 		<p>描述: <textarea name="desc" rows="4" cols="50"></textarea></p>
 	

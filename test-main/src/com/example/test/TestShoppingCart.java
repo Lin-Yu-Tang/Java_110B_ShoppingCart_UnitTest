@@ -11,24 +11,28 @@ public class TestShoppingCart {
 		
 		ShoppingCartServiceImpl service = new ShoppingCartServiceImpl();
 		
-		ShoppingCart cart = service.addProductToCart("1");
+		ShoppingCart cart = new ShoppingCart();
 		
-		cart = service.appendProductToCart(cart, "2");
-		cart = service.appendProductToCart(cart, "2");
-		cart = service.appendProductToCart(cart, "2");
+		cart = service.addProductToCart(cart, "1", 20);
+		cart = service.addProductToCart(cart, "1", 10); // update case
+		cart = service.addProductToCart(cart, "1", 12);
+		cart = service.addProductToCart(cart, "3", 1);
+		cart = service.addProductToCart(cart, "3", 2);
+		cart = service.addProductToCart(cart, "3", 10);
+		cart.cartInfo();
 		
+		// test remove
+		System.out.println("remove test!!");
+		cart = service.removeProductFromCart(cart, "1");
 		cart = service.removeProductFromCart(cart, "2");
 		cart = service.removeProductFromCart(cart, "1");
+		cart = service.removeProductFromCart(cart, "3");
 		cart = service.removeProductFromCart(cart, "1");
+		cart.cartInfo();
 		
-		cart = service.removeProductFromCart(cart, "2");
-		cart = service.removeProductFromCart(cart, "2");
-		ArrayList<Product> products = cart.getProducts();
-		System.out.println("商品內容");
-		System.out.println("Amount: " + cart.getTotalAmount());
-		for(Product p:products) {
-			System.out.println(p.getName());
-		}
+		
+		
+		
 		
 	}
 	

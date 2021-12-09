@@ -5,15 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Tom Lin">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>編輯商品</title>
 </head>
 <body>
-	<h1>編輯員工資料表</h1>
+	<h1>編輯商品內容</h1>
 	
 	<form method="POST" action="updateProductServlet" enctype="multipart/form-data" >
 		<p>商品名稱: <input type="text" name="name" value="${product.name}"></p>
 		<p>價格: <input type="text" name="price" value="${product.price}"></p>
+		<p>數量: <input type="text" name="quantity" value="${product.quantity}"></p>
 		<p><img src="showImage?pnum=${product.id}" width="300" height="500"></p>
 		<p>照片: <input type="file" name="picture"></p>
 		<p>描述: <textarea name="desc" rows="4" cols="100">${product.description}</textarea></p>

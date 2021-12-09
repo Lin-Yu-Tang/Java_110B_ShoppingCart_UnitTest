@@ -23,5 +23,11 @@ public class ShoppingCart {
 		return "ShoppingCart [products=" + products + ", totalAmount=" + totalAmount + "]";
 	}
 	
-	
+	public void cartInfo() {
+		for (Product p:products) {
+			System.out.println("Product: id=" + p.getId() + ", p=" + p.getPrice() + ", q=" + p.getQuantity());
+		}
+		System.out.println("total: $" + totalAmount);
+		
+	}
 }

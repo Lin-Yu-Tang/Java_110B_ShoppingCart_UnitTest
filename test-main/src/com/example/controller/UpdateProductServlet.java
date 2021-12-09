@@ -25,7 +25,11 @@ import org.apache.commons.io.IOUtils;
 import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
-
+/**
+ * 
+ * @author Tom Lin
+ * @apiNote read date from editProduct.jsp, update product to database
+ */
 @WebServlet("/updateProductServlet")
 public class UpdateProductServlet extends HttpServlet {
 	
@@ -40,8 +44,6 @@ public class UpdateProductServlet extends HttpServlet {
 		out.print("表單已送出");
 		
 		ProductServiceImpl service = new ProductServiceImpl();
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		System.out.println("is multipart? " + isMultipart);
 		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// Configure a repository (to ensure a secure temp location is used)
@@ -54,12 +56,13 @@ public class UpdateProductServlet extends HttpServlet {
 		try {
 			List<FileItem> items = upload.parseRequest(request);
 			request.getParameter("picture");
-			if (items.get(2).getString("UTF-8").equals("")) {
+			if (items.get(3).getString("UTF-8").equals("")) {
 				// 沒有更新圖片
 				String name = items.get(0).getString("UTF-8");
 				String price = items.get(1).getString();
-				String desc = items.get(3).getString("UTF-8");
-				String id = items.get(4).getString("UTF-8");
+				String quantity = items.get(2).getString();
+				String desc = items.get(4).getString("UTF-8");
+				String id = items.get(5).getString("UTF-8");
 //				System.out.println("取得編輯後檔案:");
 //				System.out.println("id:" + id);
 //				System.out.println("name: " + name);
@@ -69,6 +72,7 @@ public class UpdateProductServlet extends HttpServlet {
 				Product tempProduct = service.selectOneProduct(id);
 				tempProduct.setName(name);
 				tempProduct.setPrice(Integer.parseInt(price));
+				tempProduct.setQuantity(Integer.parseInt(quantity));
 				tempProduct.setDescription(desc);
 				service.updateProduct(tempProduct);
 				
@@ -76,9 +80,10 @@ public class UpdateProductServlet extends HttpServlet {
 				// 有更新圖片
 				String name = items.get(0).getString("UTF-8");
 				String price = items.get(1).getString();
-				InputStream pictureIs = items.get(2).getInputStream();
-				String desc = items.get(3).getString("UTF-8");
-				String id = items.get(4).getString("UTF-8");
+				String quantity = items.get(2).getString();
+				InputStream pictureIs = items.get(3).getInputStream();
+				String desc = items.get(4).getString("UTF-8");
+				String id = items.get(5).getString("UTF-8");
 //				System.out.println("取得編輯後檔案:(有圖檔)");
 //				System.out.println("id:" + id);
 //				System.out.println("name: " + name);
@@ -89,6 +94,7 @@ public class UpdateProductServlet extends HttpServlet {
 				Product tempProduct = service.selectOneProduct(id);
 				tempProduct.setName(name);
 				tempProduct.setPrice(Integer.parseInt(price));
+				tempProduct.setQuantity(Integer.parseInt(quantity));
 				tempProduct.setDescription(desc);
 				byte[] bytes = IOUtils.toByteArray(pictureIs);
 				try {

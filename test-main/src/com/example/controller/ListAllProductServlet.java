@@ -20,7 +20,9 @@ import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
 /**
- * Servlet implementation class ListAllProductServlet
+ * 
+ * @author Tom Lin
+ * @apiNote 列出所有商品內容
  */
 @WebServlet("/listAllProductServlet")
 public class ListAllProductServlet extends HttpServlet {

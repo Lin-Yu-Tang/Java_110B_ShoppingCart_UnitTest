@@ -4,10 +4,8 @@ import com.example.model.ShoppingCart;
 
 public interface ShoppingCartService {
 	
-	public ShoppingCart addProductToCart(String ProductId);
+	public ShoppingCart addProductToCart(ShoppingCart cart, String productId, int quantity);
 	
-	public ShoppingCart removeProductFromCart(ShoppingCart cart, String ProductId);
-	
-	
-	public ShoppingCart appendProductToCart(ShoppingCart cart, String ProductId);
+	public ShoppingCart removeProductFromCart(ShoppingCart cart, String productId);
+
 }

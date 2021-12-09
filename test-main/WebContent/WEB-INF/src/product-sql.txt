@@ -1,13 +1,51 @@
 drop database if exists `shopping-cart-test`;
 create database if not exists `shopping-cart-test`;
 use `shopping-cart-test`;
+
+# 產品
 drop table if exists product;
 create table if not exists product(
 id int auto_increment not null,
 name varchar(64) not null,
 picture mediumblob,
 price int not null,
+quantity smallint not null,
+seller_id int,
 description varchar(1024),
+created_time timestamp default CURRENT_TIMESTAMP,
+last_update_time timestamp on update CURRENT_TIMESTAMP,
+
+primary key (id)
+)CHARACTER SET utf8;
+
+# 商品賣家
+drop table if exists seller;
+create table if not exists seller(
+id int auto_increment not null,
+name varchar(64) not null,
+picture mediumblob,
+email varchar(128) not null,
+phone_number varchar(12) not null,
+account_name varchar(16) not null,
+password varchar(1024) not null,
+created_time timestamp default CURRENT_TIMESTAMP,
+last_update_time timestamp on update CURRENT_TIMESTAMP,
+
+primary key (id)
+)CHARACTER SET utf8;
+
+# 一般使用者
+drop table if exists `user`;
+create table if not exists `user`(
+id int auto_increment,
+username varchar(20) not null,
+password varchar(8) not null,
+email varchar(128) not null,
+phone_number varchar(12) not null,
+address varchar(128) not null,
+picture mediumblob,
+created_time timestamp default CURRENT_TIMESTAMP,
+last_update_time timestamp on update CURRENT_TIMESTAMP,
 
 primary key (id)
 )CHARACTER SET utf8;

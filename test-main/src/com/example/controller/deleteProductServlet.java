@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.example.dao.ProductServiceImpl;
 
 /**
- * Servlet implementation class deleteProductServlet
+ * 
+ * @author Tom Lin
+ * @apiNote deal with product delete
  */
 @WebServlet("/deleteProductServlet")
 public class DeleteProductServlet extends HttpServlet {

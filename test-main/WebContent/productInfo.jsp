@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Tom Lin">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
@@ -12,11 +13,51 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>狗狗商城</title>
+    <style>
+        .row {
+            padding-top: 20px;
+        }
+
+        .testdiv {
+            border: 5px outset red;
+        }
+
+        .testdiv2 {
+            border: 3px dashed greenyellow;
+        }
+
+        .prices {
+            color: red;
+        }
+
+        .productImg {
+            height: 300px; width: 300px;
+        }
+        /* 目前失靈 */
+        @include 
+        media-breakpoint-down(sm) {
+            .carousel-inner {
+                height: 600px;
+            }
+        }
+        .carousel-inner {
+            height: 550px;
+        }
+    </style>
+    <script>
+        // 文字提示效果
+        function turnOnlight(x) {
+            x.style = "color: white;";
+        }
+        function turnOfflight(x) {
+            x.style = "color: black;";
+        }
+    </script>
 </head>
 <body>
 	<nav class="navbar  sticky-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/test-main">
                 <img src="homePageImg/pawprint.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 <span style="color: black;" onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">狗狗商城</span>
             </a>
@@ -67,6 +108,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
+                    <form method="get" action="shoppingCartServlet">
                     <p class="card-text"><small class="text-muted">123123</small></p>
                     <p class="card-text">賣家: 商城老闆</p>
                     <p class="card-text">價格: <strong style="color: red;">$ ${product.price}</strong></p>
@@ -74,34 +116,57 @@
                         <span class="input-group col-xs-2">
                             <span style="margin-right: 10px;">數量: </span>
                             <button class="btn btn-sm btn-outline-secondary" type="button" id="button-sub">-</button>
-                            <input type="text" class="form-control form-control-sm text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" maxlength="4" style="max-width: 80px;" value="1" id="buy-amount">
+                            <input type="text" class="form-control form-control-sm text-center"  
+                            aria-label="Example text with button addon" 
+                            aria-describedby="button-addon1" maxlength="${product_quantity_len}" 
+                            style="max-width: 80px;" name="buy-amount" value="1" id="buy-amount">
                             <button class="btn btn-sm btn-outline-secondary" type="button" id="button-add">+</button>
-                            <small class="text-muted" style="padding-left: 10px;">剩餘數量: 123</small>
+                            <small class="text-muted" style="padding-left: 10px;">剩餘數量: ${product.quantity}</small>
+                            <input type="hidden" id="product-q" value="${product.quantity}">
+                            <input type="hidden" name="pid" value="${product.id}">
+                            <input type="hidden" name="action" value="add">
                         </span>
-                        <script>
-                            $("#button-add").click(function(){
-                               let amount = $("#buy-amount").val();
-                               if (amount < 9999){
-                                   amount++;
-                               }
-                               $("#buy-amount").val(amount);
-                            });
-                    
-                            $("#button-sub").click(function(){
-                                let amount = $("#buy-amount").val();
-                                if (amount > 1) {
-                                    amount--;
-                                }
-                                $("#buy-amount").val(amount);
-                            });
-                        </script>
-    
                     </p>
     
                     <p class="card-text">
                         <button type="button" class="btn btn-outline-danger">加入購物車</button>
-                        <button type="button" class="btn btn-danger">直接結帳</button>
+                        <button type="submit" class="btn btn-danger">直接結帳</button>
                     </p>
+                    </form>
+                    <script>
+                        let storage = $("#product-q").val();
+                        var amount = $("#buy-amount").val();
+                        storage = parseInt(storage);
+                        amount = parseInt(amount);
+                        
+                        $("#buy-amount").keypress(function(){
+                            let quantity = $("#buy-amount").val();
+
+                            if (quantity > storage){
+                                $("#buy-amount").val(storage);
+                            }
+                        });
+
+
+                        $("#button-add").mousedown(function(){
+                        	amount = parseInt($("#buy-amount").val());
+                           if (amount < storage){
+                               amount++;
+                           }
+                           $("#buy-amount").val(amount);
+                        });
+                
+                        $("#button-sub").mousedown(function(){
+                        	amount = parseInt($("#buy-amount").val());
+                        	if (amount > 1) {
+                                amount--;
+                            }
+                            $("#buy-amount").val(amount);
+                        });
+
+                        
+
+                    </script>
                 </div>
               </div>
             </div>
@@ -137,7 +202,7 @@
         </a>
 
         <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">首頁</a></li>
+            <li class="nav-item"><a href="/test-main" class="nav-link px-2 text-muted">首頁</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">聯絡客服</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">關於我們</a></li>
         </ul>
