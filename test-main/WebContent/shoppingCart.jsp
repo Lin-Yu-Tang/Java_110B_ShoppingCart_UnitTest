@@ -28,6 +28,7 @@
 		<td>單價</td>
 		<td>數量</td>
 		<td>小計</td>
+		<td>   </td>
 	</tr>
 	<c:forEach var="product" items="${shoppingcart.products}">
 	<tr>
@@ -35,6 +36,7 @@
 		<td><img src="showImage?pnum=${product.id}" width="300" height="500"></td>
 		<td>${product.price}</td>
 		<td>${product.quantity}</td>
+		<td><a href="shoppingCartServlet?pid=${product.id}&action=remove">刪除此商品</a></td>
 	</tr>
 	</c:forEach>
 	</table>
@@ -42,7 +44,9 @@
 	
 	<h2>總金額: ${shoppingcart.totalAmount}</h2>
 	</div>
-	
+	<div>
+	<a href="/test-main">首頁</a>
+	</div>
 	
 	
 </body>

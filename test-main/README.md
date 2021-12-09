@@ -38,4 +38,5 @@ displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProduc
 ## 購物車功能
 購物車類別: ShoppingCart, Service: ShoppingCartService
 1. productInfo.jsp -> 直接購買 -> ShoppingCartServlet -> shoppingCart.jsp
+如果購物車沒商品，不論是刪除或初次瀏覽購物車，將導向noActiveCart.jsp
 
