@@ -19,9 +19,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>狗狗商城</title>
 <style>
-.row {
-	padding-top: 20px;
-}
+
 
 .testdiv {
 	border: 5px outset red;
@@ -39,7 +37,7 @@
 	height: 300px;
 	width: 300px;
 }
-/* 目前失靈 */
+/* 目前失靈 
 @
 include 
         media-breakpoint-down(sm) { .carousel-inner { height:600px;
@@ -47,6 +45,8 @@ include
 }
 
 }
+
+*/
 .carousel-inner {
 	height: 550px;
 }
@@ -85,33 +85,51 @@ include
 						<img src="homePageImg/magnifying-glass.png" width="25" height="25">
 					</button>
 				</form>
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<!-- 讓後面的元素靠右對齊 -->
-					<li class="nav-item" style="margin-left: auto;"></li>
-				</ul>
-
+				</div>
 				<!-- 需要有新增商品後，顯示紅色圈圈提示圖的效果
                 參考資料: https://getbootstrap.com/docs/5.1/components/badge/
                 -->
-				<a class="nav-link active " aria-current="page" href="shoppingCartServlet"
-					style="color: black;" onmouseover="turnOnlight(this)"
-					onmouseout="turnOfflight(this)"><img
-					src="/test-main/homePageImg/shopping-cart.png" width="25"
-					height="25"></a>
-					
-				<a class="nav-link" href="#"
-					style="color: black;" onmouseover="turnOnlight(this)"
-					onmouseout="turnOfflight(this)">登入</a>
+                <a class="nav-link active " aria-current="page"
+                    href="shoppingCartServlet" style="color: black;"
+                    onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)"><img
+                    src="/test-main/homePageImg/shopping-cart.png" width="25"
+                    height="25"></a>
+
+                <a class="nav-link py-0 nologin-1" href="#"
+                    style="color: black;" onmouseover="turnOnlight(this)"
+                    onmouseout="turnOfflight(this)">註冊</a>
+                <span class="p-0 nologin"> | </span>
+                <a class="nav-link py-0 nologin" href="loginServlet?login=true" style="color: black;"
+                    onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">登入</a>
+                <a class="nav-link" href="#" style="color: black;"
+                    onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">賣家中心</a>
+				
+				    <script>
+			        let loginTag = "<span class='dropdown'>"
+			        +"<a class='nav-link py-0 dropdown-toggle' data-bs-toggle='dropdown'"
+			        +"href='#' style='color: black;' "
+			        +"onmouseover='turnOnlight(this)' onmouseout='turnOfflight(this)'>"
+			        +"<img src='/test-main/homePageImg/cat0.png' width='15'"
+           			+"height='15'> ${sessionScope.username}</a>"
+           			+"<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>"
+           			+"<li><a class='dropdown-item' href='#'>會員中心</a></li>"
+           			+"<li><a class='dropdown-item' href='loginServlet?login=false'>登出</a></li>";
+           			
+					let userid = '${sessionScope.username}';
+					if (userid != '') {
+	  		            $(".nologin-1").replaceWith(loginTag);
+ 			            $(".nologin").remove();
+					}
 
 
-				<!-- 登入後須顯示為使用者圖像，並有下拉式選單 
+    				</script>
+				
+				
+					<!-- 登入後須顯示為使用者圖像，並有下拉式選單 
                 參考資料: https://getbootstrap.com/docs/5.1/components/dropdowns/
                 -->
 
-				<a class="nav-link" href="#" style="color: black;"
-					onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">會員中心</a>
 			</div>
-		</div>
 	</nav>
 
 
@@ -167,7 +185,7 @@ include
 
 		<!-- Three columns of text below the carousel -->
 		<!-- img檔案要規定大小-->
-		<div class="row testdiv">
+		<div class="row testdiv pt-3">
 			<c:forEach items="${products}" var="product">
 
 				<div class="col-lg-4">

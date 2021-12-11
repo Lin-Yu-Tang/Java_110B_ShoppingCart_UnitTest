@@ -40,3 +40,5 @@ displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProduc
 1. productInfo.jsp -> 直接購買 -> ShoppingCartServlet -> shoppingCart.jsp
 如果購物車沒商品，不論是刪除或初次瀏覽購物車，將導向noActiveCart.jsp
 
+## 登入接口
+homePage.jsp -> LoginServlet 登入/登出
