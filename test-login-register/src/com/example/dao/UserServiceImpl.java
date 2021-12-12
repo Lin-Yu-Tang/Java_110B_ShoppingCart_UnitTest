@@ -15,19 +15,24 @@ public class UserServiceImpl implements UserService {
 	String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
 	@Override
-	public void  RegisterUser(User user) {
+	public void RegisterUser(User user) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String SQL_INSERT = "INSERT INTO user(username, password) VALUES(?,?)";
+		String SQL_INSERT = "INSERT INTO user( username, password, email, phone_number, address, picture) VALUES(?,?,?,?,?,?)";
 
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
 			pstmt = conn.prepareStatement(SQL_INSERT);
-
+			
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setString(4, user.getPhone_number());
+			pstmt.setString(5, user.getAddress());
+			pstmt.setString(6, user.getPicture());
+
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -64,7 +69,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	
 	@Override
 	public boolean LoginUser(String username, String password) {
 		Connection conn = null;
@@ -82,34 +86,37 @@ public class UserServiceImpl implements UserService {
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				
+
 				String pwd = rs.getString("password");// 找到資料類裡面user所對應的passwrod
 				if (pwd.equals(password)) {// 把我們從資料庫中找出來的password和從jsp中傳過來的passwrod比較
 					conn.close();
 					pstmt.close();
 					return true; // ture代表驗證成功
 				} else {
+					conn.close();
+					pstmt.close();
 					return false;// false代表驗證失敗
 				}
 			} else {
+				conn.close();
+				pstmt.close();
 				return false;
 			}
 			/**
 			 * 連線相關物件沒關閉，我的習慣這邊會寫關閉語法，最後finally一樣要寫關閉語法
 			 * 但是這邊無法下關閉語法是因為你在這之前就已經有return方法；除非你在return以前都要關閉所有連線物件
-			 * 我的寫法一定是等所有連線該做的事情都處理完畢，再return
-			 * 這邊架構都要重寫
+			 * 我的寫法一定是等所有連線該做的事情都處理完畢，再return 這邊架構都要重寫
 			 */
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			
+
 			/**
 			 * ClassNotFoundException 應該要在這邊捕捉，而不是throw掉
 			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		
+
 		} finally { // 這裡是一些操作資料庫之後的一些關閉操作
 			if (rs != null) {
 				try {

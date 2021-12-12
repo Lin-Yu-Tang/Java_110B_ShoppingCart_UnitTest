@@ -38,10 +38,18 @@ public class RegisterServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String phone_number = request.getParameter("phone_number");
+		String address = request.getParameter("address");
+		String picture = request.getParameter("picture");
 
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
+		user.setEmail(email);
+		user.setPhone_number(phone_number);
+		user.setAddress(address);
+		user.setPicture(picture);
 		UserServiceImpl userDao = new UserServiceImpl();
 		userDao.RegisterUser(user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("registersuccess.jsp");

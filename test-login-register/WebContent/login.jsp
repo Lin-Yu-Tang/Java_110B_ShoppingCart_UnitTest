@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="LoginServlet" method="post">
+<form action="loginServlet" method="post">
 	 
 	 <h2>登入</h2>
 	<table>
             <tr>
                 <td>帳號:</td>
-                <td><input type="text" name="username" /></td>
+                <td><input type="text" name="username"  required/></td>
             </tr>
             <br>
             <tr>
                 <td>密碼:</td>
-                <td><input type="password" name="password" /></td>
+                <td><input type="password" name="password" required/></td>
             </tr>
             
             <tr>
