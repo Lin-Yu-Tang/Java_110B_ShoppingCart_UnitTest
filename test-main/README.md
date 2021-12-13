@@ -31,6 +31,8 @@ displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProduc
 ## 首頁
 1. HomePageServlet -> homePage.jsp
 
+## 網頁基礎模板(持續更新)
+WEB-INF/view/skel.jsp
 
 ## 個別商品頁面
 1. HomePageServlet -> ProductInfoServlet -> productInfo.jsp
@@ -38,7 +40,14 @@ displayProducts.jsp已經加入刪除提示功能，但重新導向ListAllProduc
 ## 購物車功能
 購物車類別: ShoppingCart, Service: ShoppingCartService
 1. productInfo.jsp -> 直接購買 -> ShoppingCartServlet -> shoppingCart.jsp
-如果購物車沒商品，不論是刪除或初次瀏覽購物車，將導向noActiveCart.jsp
+2. 如果購物車沒商品，不論是刪除或初次瀏覽購物車，將導向emptyCart.jsp
+3. 尚未完成shoppingCart.jsp 網頁渲染
 
 ## 登入接口
 homePage.jsp -> LoginServlet 登入/登出
+
+
+## 搜尋bar
+使用者輸入資訊、進行商品搜尋
+SearchProductServlet ->
+

@@ -62,21 +62,26 @@ public class ShoppingCartServlet extends HttpServlet {
 			cart = service.removeProductFromCart(cart, pid);
 			cart.cartInfo();
 		}
-		// neither both cases, just go on (customer just checkout the cart)
+		// neither both cases, just go on (i.e. customer just checkout the cart)
 		
 		
 		// finally, add cart object to session
 		session.setAttribute("shoppingcart", cart);
+		if (cart != null && cart.getProducts() != null) {
+			session.setAttribute("productNumInCart", cart.getProducts().size());
+		}else {
+			session.setAttribute("productNumInCart", 0);
+		}
 		
 		RequestDispatcher dispatcher = null;
 		if (cart == null || cart.getProducts() == null) {
-			dispatcher = request.getRequestDispatcher("emptyCart.jsp");
+			dispatcher = request.getRequestDispatcher("empty_cart");
 		}else {
 			// if cart is not null, but products array is empty
 			if (cart.getProducts().isEmpty())
-				dispatcher = request.getRequestDispatcher("emptyCart.jsp");
+				dispatcher = request.getRequestDispatcher("empty_cart");
 			else 
-				dispatcher = request.getRequestDispatcher("shoppingCart.jsp");
+				dispatcher = request.getRequestDispatcher("cart");
 		}
 		
 		dispatcher.forward(request, response);

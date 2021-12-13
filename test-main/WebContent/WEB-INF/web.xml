@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>test-main</display-name>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- url mapping -->
+  <servlet>
+  	<servlet-name>HomePageJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/homePage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HomePageJSP</servlet-name>
+  	<url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductInfoJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/productInfo.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductInfoJSP</servlet-name>
+  	<url-pattern>/product_info</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ShoppingCartJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/shoppingCart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ShoppingCartJSP</servlet-name>
+  	<url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>EmptyCartJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/emptyCart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>EmptyCartJSP</servlet-name>
+  	<url-pattern>/empty_cart</url-pattern>
+  </servlet-mapping>
+  
+  <!-- test fileds -->
+  <servlet>
+  	<servlet-name>TestImgJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/testImg.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TestImgJSP</servlet-name>
+  	<url-pattern>/testImg</url-pattern>
+  </servlet-mapping>
+  
+  <!-- home page -->
+  <welcome-file-list>
+    <welcome-file>HomePageServlet</welcome-file>
+  </welcome-file-list>
+</web-app>

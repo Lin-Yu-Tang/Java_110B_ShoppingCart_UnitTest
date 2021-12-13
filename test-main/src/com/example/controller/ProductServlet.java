@@ -30,7 +30,7 @@ import com.example.model.Product;
  * @author Tom Lin
  * @apiNote 取得新增商品表單資料，寫入資料庫
  */
-@WebServlet("/product")
+@WebServlet("/newproduct")
 public class ProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

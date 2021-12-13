@@ -32,7 +32,7 @@ public class HomePageServlet extends HttpServlet {
 		request.setAttribute("products", products);
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("homePage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home");
 		dispatcher.forward(request, response);
 	}
 
@@ -40,7 +40,6 @@ public class HomePageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

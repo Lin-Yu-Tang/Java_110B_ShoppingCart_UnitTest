@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginServlet
+ * 
+ * @author Tom Lin
+ * @apiNote this is a test servlet provide root login without validation
  */
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {

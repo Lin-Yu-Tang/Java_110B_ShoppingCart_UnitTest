@@ -14,7 +14,8 @@ import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
 /**
- * Servlet implementation class ProductInfoServlet
+ * @author Tom Lin
+ * @apiNote render a product & product information
  */
 @WebServlet("/showProductInfo")
 public class ProductInfoServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class ProductInfoServlet extends HttpServlet {
 		request.setAttribute("product_quantity_len", quantity_length);
 		request.setAttribute("product", theProduct);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("productInfo.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("product_info");
 		dispatcher.forward(request, response);
 	}
 

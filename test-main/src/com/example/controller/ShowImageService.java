@@ -19,31 +19,38 @@ import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
 /**
- * Servlet implementation class ShowImage
+ * @author Tom Lin
+ * @apiNote 網頁端取得照片調用的servlet
  */
 @WebServlet("/showImage")
 public class ShowImageService extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pnum = request.getParameter("pnum");
-		ProductServiceImpl service = new ProductServiceImpl();
-		Product product = service.selectOneProduct(pnum);
-		response.setContentType("image/png");
-		Blob picture = product.getPicture();
-		ServletOutputStream outputStream = null;
-		try {
-			InputStream binaryStream = picture.getBinaryStream();
-			BufferedImage bi = ImageIO.read(binaryStream);
-			outputStream = response.getOutputStream();
-			ImageIO.write(bi, "png", outputStream);
-			outputStream.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (outputStream != null)
+		if (pnum != null) {
+			response.setContentType("image/png");
+			ProductServiceImpl service = new ProductServiceImpl();
+			Product product = service.selectOneProduct(pnum);
+			Blob picture = product.getPicture();
+			ServletOutputStream outputStream = null;
+			
+			try {
+				InputStream binaryStream = picture.getBinaryStream();
+				BufferedImage bi = ImageIO.read(binaryStream);
+				outputStream
+				= response.getOutputStream();
+				ImageIO.write(bi, "png", outputStream);
 				outputStream.close();
+			}catch (NullPointerException e) {
+				System.out.println("picture not found");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if (outputStream != null)
+					outputStream.close();
+			}
 		}
-	}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
