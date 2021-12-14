@@ -20,8 +20,6 @@
 			<td>數量</td>
 			<td>圖片</td>
 			<td>商品描述</td>
-			<td>修改</td>
-			<td>刪除</td>
 		</tr>
 		<c:forEach var="product" items="${allProducts}">
 		<tr>
@@ -30,27 +28,10 @@
 			<td>${product.quantity}</td>
 			<td><img src="showImage?pnum=${product.id}" width="300" height="300"></td>
 			<td>${product.description}</td>
-			<td><a href="editProductServlet?pnum=${product.id}" >修改</a></td>
-			<td><button onclick="selectButton(this.value)" value="${product.id}" type="button">刪除</button></td>
 		</tr>
 		</c:forEach>
 	</table>
 	</div>
-	<script>
-	// 刪除功能(未完成)
-	{
-	function selectButton(theValue) {
-		let act = confirm("您要刪除此商品嗎? (ID = " + theValue + ")" );
-		const xhttp = new XMLHttpRequest();
-		if (act == true) {
-			alert("此商品已完成刪除");
-			xhttp.open("GET", "deleteProductServlet?pnum="+theValue);
-			xhttp.send();
-			location.replace("listAllProductServlet");
-		}
-		
-	}
-	}
-	</script>
+<a href="/test-main">首頁</a>
 </body>
 </html>

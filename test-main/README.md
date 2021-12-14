@@ -49,5 +49,6 @@ homePage.jsp -> LoginServlet 登入/登出
 
 ## 搜尋bar
 使用者輸入資訊、進行商品搜尋
-SearchProductServlet ->
+實作ProductServiceImpl.searchProduct(String[] strs)僅針對指定關鍵字陣列進行搜尋(未針對錯別字列出可能結果)
+SearchProductServlet -> searchProduct.jsp (尚未完成網頁渲染)
 

@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 	 * 取得商品所有欄位
 	 */
 	@Override
-	public ArrayList<Product> ListAllProduct() {
+	public ArrayList<Product> listAllProduct() {
 		ArrayList<Product> list = new ArrayList<Product>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -336,6 +336,93 @@ public class ProductServiceImpl implements ProductService {
 				}
 			}
 		}
+	}
+	@Override
+	public ArrayList<Product> searchProduct(String[] strs) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		final int keywordSize = strs.length;
+		String SQL_SELECT = "SELECT id, name, picture, price, quantity, seller_id, description "
+				+ "FROM product WHERE NAME LIKE ? or DESCRIPTION LIKE ?";
+		// rebuild the SQL statement
+		for (int i=0; i<keywordSize-1; i++) {
+			SQL_SELECT += "or NAME LIKE ? or DESCRIPTION LIKE ?";
+		}
+		
+		// create conection object
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+			
+			// set prepared statement
+			for (int i=0; i<keywordSize; i++) {
+				if (i == 0) {
+					pstmt.setString(i+1, "%" + strs[i] + "%");
+					pstmt.setString(i+2, "%" + strs[i] + "%");
+				}else {
+					pstmt.setString(i*2 + 1, "%" + strs[i] + "%");
+					pstmt.setString(i*2 + 2, "%" + strs[i] + "%");
+				}
+				// mapping rule
+				/*
+				k SQL
+				0 : 1 2       k+1 k+2
+				1 : 3 4       2k+1 2k+2
+				2 : 5 6       2k+1 2k+2
+				3 : 7 8       2k+1 2k+2
+				 */
+			}
+
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Product tempProduct = new Product();
+				tempProduct.setId(Integer.toString(rs.getInt("id")));
+				tempProduct.setName(rs.getString("name"));
+				tempProduct.setPicture(rs.getBlob("picture"));
+				tempProduct.setPrice(rs.getInt("price"));
+				tempProduct.setQuantity(rs.getInt("quantity"));
+				tempProduct.setSeller_id(Integer.toString(rs.getInt("seller_id")));
+				tempProduct.setDescription(rs.getString("description"));
+				list.add(tempProduct);
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		return list;
 	}
 	
 }

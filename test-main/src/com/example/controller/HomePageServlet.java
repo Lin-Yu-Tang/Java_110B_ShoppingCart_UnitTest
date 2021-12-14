@@ -27,7 +27,7 @@ public class HomePageServlet extends HttpServlet {
 		
 		ProductServiceImpl service = new ProductServiceImpl();
 		
-		ArrayList<Product> products = service.ListAllProduct();
+		ArrayList<Product> products = service.listAllProduct();
 		
 		request.setAttribute("products", products);
 		

@@ -29,7 +29,7 @@ public class ListAllProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductServiceImpl productService = new ProductServiceImpl();
-		ArrayList<Product> listAllProduct = productService.ListAllProduct();
+		ArrayList<Product> listAllProduct = productService.listAllProduct();
 		response.setContentType("text/html;charset=UTF-8");
 		
 		request.setAttribute("allProducts", listAllProduct);
