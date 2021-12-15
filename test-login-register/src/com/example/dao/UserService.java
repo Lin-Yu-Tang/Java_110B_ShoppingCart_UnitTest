@@ -6,5 +6,5 @@ public interface UserService {
 	public boolean LoginUser(String username, String password);
 
 	public void RegisterUser(User user);
-
+	public boolean userIsCheck(String loginId);
 }
