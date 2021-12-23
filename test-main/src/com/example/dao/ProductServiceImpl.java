@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.example.model.Product;
 
@@ -423,6 +424,61 @@ public class ProductServiceImpl implements ProductService {
 		
 		
 		return list;
+	}
+	@Override
+	public HashMap<Integer, Integer> getCurrentStorage(ArrayList<Product> products) {
+		if (products == null) {return null;}
+		HashMap map = new HashMap();
+		String SQL_SELECT = "SELECT quantity FROM product WHERE id = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+			
+			for (int i=0; i<products.size();i++) {
+				pstmt.setInt(1, Integer.parseInt(products.get(i).getId()));
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					map.put(Integer.parseInt(products.get(i).getId()), rs.getInt("quantity"));
+				}
+			}
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		return map;
 	}
 	
 }

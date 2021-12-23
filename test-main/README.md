@@ -1,24 +1,26 @@
-# 賣家商品管理頁面
+# 專案總架構表
 
-## 新增商品:
+## 賣家商品管理頁面
+
+### 新增商品:
 newProduct.html --> ProductServlet
 
-## 列出所有商品內容:
+### 列出所有商品內容:
 ListAllProductServlet --> displayProducts.jsp
 
 
-## 個別商品查詢與指定欄位查詢
+### 個別商品查詢與指定欄位查詢
 ShowImageService 取出資料方法要修改為只取出圖片
 
 
-## 更新商品
+### 更新商品
 1. 由ListAllProductServlet進入至displayProducts.jsp列出所有商品內容
 2. 加上個別商品的修改連結並將商品ID傳送到EditProductServlet，
 3. 取出資料，並把資料傳入value中forward至editProduct.jsp中。
 4. 完成編輯送出後，將資料送到UpdateProductServlet中完成更新
 
 
-## 刪除商品
+### 刪除商品
 1. 由ListAllProductServlet進入至displayProducts.jsp列出所有商品內容
 2. 加入刪除連結將欲刪除的商品傳送到DeleteProductServlet執行刪除
 3. 加入javascript 提示視窗，再次確認是否要刪除
@@ -47,8 +49,15 @@ WEB-INF/view/skel.jsp
 homePage.jsp -> LoginServlet 登入/登出
 
 
-## 搜尋bar
+## 搜尋bar component
 使用者輸入資訊、進行商品搜尋
 實作ProductServiceImpl.searchProduct(String[] strs)僅針對指定關鍵字陣列進行搜尋(未針對錯別字列出可能結果)
-SearchProductServlet -> searchProduct.jsp (尚未完成網頁渲染)
+navbarSearchCompnent -> SearchProductServlet -> searchProduct.jsp (尚未完成網頁渲染)
 
+## 結帳
+shoppingCart.jsp點選結帳 -> CheckoutServlet 
+-> 呼叫CheckoutServiceImpl.checkout() 
+	1. 更新product table、
+	2. 存入消費者訂單table(orders、order_items)、
+	3. 廠商訂單table(seller_order、seller_order_items)
+結帳成功 ? 返回首頁 : 返回購物車頁面

@@ -51,6 +51,22 @@ include
 .carousel-inner {
 	height: 550px;
 }
+/* logout button css */
+.btn-custom1 {
+	color: black;
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+}
+
+.btn-custom1:hover {
+	color: black;
+	background-color: rgba(206, 205, 225, 0.39);
+	border-color: rgba(0, 0, 0, 0);
+}
+
+.btn-custom1:focus, .btn-custom.focus {
+	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0)
+}
 </style>
 <script>
 	// 文字提示效果
@@ -94,13 +110,15 @@ include
 				width="25" height="25"></a> <a class="nav-link py-0 nologin-1"
 				href="#" style="color: black;" onmouseover="turnOnlight(this)"
 				onmouseout="turnOfflight(this)">註冊</a> <span class="p-0 nologin">
-				| </span> <a class="nav-link py-0 nologin" href="loginServlet?login=true"
-				style="color: black;" onmouseover="turnOnlight(this)"
-				onmouseout="turnOfflight(this)">登入</a> <a class="nav-link" href="#"
+				| </span> <button class="btn btn-custom py-0 nologin"
+				onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)"
+				data-bs-toggle="modal" data-bs-target="#loginModal">登入</button>
+				<a class="nav-link" href="#"
 				style="color: black;" onmouseover="turnOnlight(this)"
 				onmouseout="turnOfflight(this)">賣家中心</a>
 
 			<script>
+			// 登入後更換顯示圖示
 				let loginTag = "<span class='dropdown'>"
 						+ "<a class='nav-link py-0 dropdown-toggle' data-bs-toggle='dropdown'"
 						+ "href='#' style='color: black;' "
@@ -109,7 +127,14 @@ include
            			+"height='15'> ${sessionScope.username}</a>"
 						+ "<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>"
 						+ "<li><a class='dropdown-item' href='#'>會員中心</a></li>"
-						+ "<li><a class='dropdown-item' href='loginServlet?login=false'>登出</a></li>";
+						+ "<form name='logoutForm' method='POST' action='loginServlet'>"
+						+ "<input type='hidden' name='login' value='false'>"
+						+ "<input type='hidden' id='logoutCurrentUrl' name='loginCurrentUrl'>"
+						+ "<li><button class='btn-custom1 dropdown-item' >登出</button></li>"
+						+ "</form>"
+						+ "<script> var button = document.querySelector('form[name='logoutForm'] > button');"
+						+ "button.addEventListener(function(){"
+						+ "document.querySelector('form[name='logoutForm']').submit();});";
 
 				let userid = '${sessionScope.username}';
 				if (userid != '') {
@@ -119,6 +144,60 @@ include
 			</script>
 		</div>
 	</nav>
+	<!-- Modal for login -->
+	<div class="modal fade" id="loginModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">會員登入</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form method="POST" action="loginServlet">
+				<div class="modal-body">
+				<!-- Login Form -->
+						<div class="row col-md-8">
+							<label for="inputaccount" class="col-sm-3 col-form-label">帳號</label>
+							<span class="col-sm-10"> <input type="text"
+								class="form-control" id="inputaccount" name="username"  required>
+							</span>
+
+						</div>
+						<div class="row col-md-8">
+							<label for="inputPassword" class="col-sm-3 col-form-label">密碼</label>
+							<span class="col-sm-10"> <input type="password"
+								class="form-control" id="inputPassword" name="password" required>
+							</span>
+						</div>
+						<input type="hidden" name="login" value="true">
+						<input type="hidden" id="loginCurrentUrl" name="loginCurrentUrl">
+					<div class="row mb-3">
+						<div class="col-sm-10 offset-sm-2">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck1">
+								<label class="form-check-label" for="gridCheck1"> 自動登入 </label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/.modal body-->
+				<div class="modal-footer">
+					<input type="submit" class="btn btn-primary" value="登入">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">取消</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--/.modal-->
+	<script>
+	// 將當前URL資訊隨Login form，登入時傳送至controller
+	document.getElementById('loginCurrentUrl').value = window.location;
+	document.getElementById('logoutCurrentUrl').value = window.location;
+	</script>
 	<!--      body div      -->
 	<div class="container-xl">
 	

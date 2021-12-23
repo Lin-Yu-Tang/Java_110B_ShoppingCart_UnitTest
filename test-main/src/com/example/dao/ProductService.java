@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.example.model.Product;
 
@@ -17,4 +18,6 @@ public interface ProductService {
 	public void deleteProdct(String id);
 	
 	public ArrayList<Product> searchProduct(String[] strs);
+	
+	public HashMap<Integer, Integer> getCurrentStorage(ArrayList<Product> products);
 }
