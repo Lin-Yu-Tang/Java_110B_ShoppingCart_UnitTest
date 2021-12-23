@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.model.User;
 
@@ -25,7 +27,7 @@ public class UserServiceImpl implements UserService {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
 			pstmt = conn.prepareStatement(SQL_INSERT);
-			
+
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getEmail());
@@ -139,4 +141,64 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean userIsCheck(String loginId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+	
+		String SQL_SELECT = "select * from user where username=? ";
+		ResultSet rs = null; 
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+			pstmt.setString(1, loginId);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String user = rs.getString("username");
+				if (user.equals(loginId)) {
+					System.out.println("帳號已重複");
+					conn.close();
+					pstmt.close();
+					return true;
+				} else {
+					conn.close();
+					pstmt.close();
+					return false;
+				}
+			} else {
+				conn.close();
+				pstmt.close();
+				return false;
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				rs = null;
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				pstmt = null;
+			}
+		}
+		return false;
+	}
+
 }

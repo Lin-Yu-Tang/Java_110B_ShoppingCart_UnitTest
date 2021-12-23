@@ -24,7 +24,19 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String username = request.getParameter("username");
+		User user = new User();
+		user.setUsername(username);
+		UserServiceImpl userDao = new UserServiceImpl();
+		
+		if (userDao.userIsCheck(username)) {				//ajax 的回應用GET
+
+			response.getWriter().write("帳戶已重複");
+
+		} else {
+			userDao.RegisterUser(user);
+			response.getWriter().write("帳戶無人使用");
+		}
 
 	}
 
@@ -51,9 +63,19 @@ public class RegisterServlet extends HttpServlet {
 		user.setAddress(address);
 		user.setPicture(picture);
 		UserServiceImpl userDao = new UserServiceImpl();
-		userDao.RegisterUser(user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("registersuccess.jsp");
-		dispatcher.forward(request, response);
+
+		if (userDao.userIsCheck(username)) {
+
+			response.getWriter().write("帳戶已重複");
+			response.sendRedirect("registerfail.jsp");
+		} else {
+			userDao.RegisterUser(user);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("registersuccess.jsp");
+			dispatcher.forward(request, response);
+//			response.sendRedirect("registersuccess.jsp");
+		}
+
 	}
 
 }
