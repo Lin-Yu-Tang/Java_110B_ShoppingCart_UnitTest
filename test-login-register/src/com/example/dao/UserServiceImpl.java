@@ -146,9 +146,9 @@ public class UserServiceImpl implements UserService {
 	public boolean userIsCheck(String loginId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-	
+
 		String SQL_SELECT = "select * from user where username=? ";
-		ResultSet rs = null; 
+		ResultSet rs = null;
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
@@ -201,4 +201,112 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	@Override
+	public User selectusername(String username) {
+		User user = new User();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String SQL_SELECT = "select * from user where username=? ";
+		ResultSet rs = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+
+			pstmt.setString(1, username);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				user.setUsername(rs.getString("username"));
+
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return user;
+	}
+
+	@Override
+	public User selectpassword(String password) {
+		User user = new User();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String SQL_SELECT = "select * from user where password=? ";
+		ResultSet rs = null;
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+
+			pstmt.setString(1, password);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				user.setUsername(rs.getString("password"));
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return user;
+	}
 }

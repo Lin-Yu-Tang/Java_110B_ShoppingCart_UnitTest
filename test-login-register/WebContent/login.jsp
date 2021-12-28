@@ -14,13 +14,18 @@
 	<table>
             <tr>
                 <td>帳號:</td>
-                <td><input type="text" name="username"  required/></td>
+                <td><input type="text" name="username"  /></td>
             </tr>
             <br>
             <tr>
                 <td>密碼:</td>
-                <td><input type="password" name="password" required/></td>
+                <td><input type="password" name="password" /></td>
             </tr>
+            <tr>
+                <td>自動登入</td>
+                <td><input type="checkbox" name="autologin" value="auto" /></td>
+            </tr>
+            
             
             <tr>
                 <td colspan="2"><input type="submit" value="登入" /></td>

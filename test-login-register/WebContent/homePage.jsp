@@ -99,7 +99,7 @@ include
                     style="color: black;" onmouseover="turnOnlight(this)"
                     onmouseout="turnOfflight(this)">註冊</a>
                 <span class="p-0 nologin"> | </span>
-                <a class="nav-link py-0 nologin" href="login.jsp" style="color: black;"
+                <a class="nav-link py-0 nologin" href="LoginCookieServlet" style="color: black;"
                     onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">登入</a>
                 <a class="nav-link" href="#" style="color: black;"
                     onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">賣家中心</a>

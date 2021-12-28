@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
 
 	/**
@@ -38,8 +38,9 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
+
 		String username = request.getParameter("username");
+
 		String password = request.getParameter("password");
 		User user = new User();
 
@@ -47,21 +48,40 @@ public class LoginServlet extends HttpServlet {
 		user.setPassword(password);
 		UserServiceImpl userDao = new UserServiceImpl();
 
+		String dbusername = userDao.selectusername(username).toString();// 抓資料庫username
+//		String dbuserpassword=userDao.selectusername(password).toString();
+
 		String login = request.getParameter("login");
 		System.out.println("[action] user is login: " + login);
 
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(7 * 24 * 60 * 60);
 
+		String autokey111 = "autokey111"; // cookie名稱
+
 		if (userDao.LoginUser(username, password)) { // dao層中判斷,如果為true,跳轉到首頁
+
+			String autologin = request.getParameter("autologin");
+
+			if ("auto".equals(autologin)) {
+
+				Cookie cookie = new Cookie(autokey111, "歡迎!!");
+				cookie.setMaxAge(60);
+				response.addCookie(cookie);
+
+				response.sendRedirect("LoginCookieServlet");
+			} else {
+				response.sendRedirect("homePage.jsp");
+			}
+
 			session.setAttribute("username", username);
-			response.sendRedirect("homePage.jsp");
-		} else { 
-			session.setAttribute("username", null);	
+
+			// request.getRequestDispatcher("CookieCheckServlet").forward(request,
+			// response);
+		} else {
+			session.setAttribute("username", null);
 			response.sendRedirect("fail.jsp");
 		}
-		
-		
 
 	}
 }
