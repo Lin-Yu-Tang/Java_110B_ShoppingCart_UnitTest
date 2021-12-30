@@ -93,6 +93,8 @@ include
 	function turnOfflight(x) {
 		x.style = "color: black;";
 	}
+	
+	
 </script>
 </head>
 <body>	
@@ -131,7 +133,7 @@ include
 			<button class="btn btn-custom py-0 nologin"
 				onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)"
 				data-bs-toggle="modal" data-bs-target="#loginModal">登入</button>
-			<a class="nav-link" href="#" style="color: black;"
+			<a class="nav-link" href="sellerLoginServlet" style="color: black;"
 				onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">賣家中心</a>
 
 

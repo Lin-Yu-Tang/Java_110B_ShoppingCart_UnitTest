@@ -46,6 +46,66 @@
   	<url-pattern>/empty_cart</url-pattern>
   </servlet-mapping>
   
+  <!-- 商品管理頁面相關mapping -->
+  <servlet>
+  	<servlet-name>SellerLoginPageJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/sellerLoginPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SellerLoginPageJSP</servlet-name>
+  	<url-pattern>/sellerLogin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>SellerManageJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/sellerManage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SellerManageJSP</servlet-name>
+  	<url-pattern>/seller</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductManageJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/productManage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductManageJSP</servlet-name>
+  	<url-pattern>/seller/product_management</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductManage_ReadJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/productManageRead.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductManage_ReadJSP</servlet-name>
+  	<url-pattern>/seller/read</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductManage_CreateJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/productManageCreate.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductManage_CreateJSP</servlet-name>
+  	<url-pattern>/seller/create</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ProductManage_UpdateJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/productManageUpdate.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductManage_UpdateJSP</servlet-name>
+  	<url-pattern>/seller/update</url-pattern>
+  </servlet-mapping>
+  <!-- BUGS -->
+  <!-- 
+   -->
+  
+  
+  
   <!-- test fileds -->
   <servlet>
   	<servlet-name>TestImgJSP</servlet-name>

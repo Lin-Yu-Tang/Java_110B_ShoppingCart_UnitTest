@@ -61,3 +61,22 @@ shoppingCart.jsp點選結帳 -> CheckoutServlet
 	2. 存入消費者訂單table(orders、order_items)、
 	3. 廠商訂單table(seller_order、seller_order_items)
 結帳成功 ? 返回首頁 : 返回購物車頁面
+
+
+## 整合賣家管理頁面
+首頁 -> 賣家登入頁面(SellerLoginServlet -> login ? : sellerLoginPage.jsp) -> 賣家管理頁面 sellerManage.jsp
+賣家管理頁面: 
+1. 基本資料管理 
+2. 訂單管理 sellerManage.jsp -> ProductManagementServlet -> 
+3. 商品管理:
+sellerManage.jsp -> productManageCreate.jsp (新增), productManageUpdate.jsp (修改), productManageRead.jsp (瀏覽與刪除)
+
+
+
+
+
+
+
+
+
+
