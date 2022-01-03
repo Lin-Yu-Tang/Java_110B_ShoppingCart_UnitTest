@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache, no-store">
+<meta http-equiv="expires" content="0">
     <title>狗狗商城</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -48,7 +51,7 @@
     <div class="row">
         <div class="col-4 mb-0 ps-4 p-5" style="background-color: rgb(166, 111, 218); height: 600px;">
             <h1 class="h3 mb-3 fw-bolder text-center">登入賣家中心</h1>
-            <form method="POST" action="sellerLoginServlet">
+            <form method="POST" action="sellerLogin">
                 <div class="mb-3">
                     <label for="floatingInput" style="color: cornsilk;">帳號</label>
                     <input type="text" class="form-control" id="floatingInput" name="sellerAccount" placeholder="請輸入帳號">
@@ -60,7 +63,7 @@
                 </div>
                 <div class="checkbox mb-3">
                     <label style="color: cornsilk;">
-                    <input type="checkbox" value="remember-me">自動登入
+                    <input type="checkbox" name="autologin" value="true">自動登入
                     </label>
                 </div>
                 <div class="mb-3">

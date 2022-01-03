@@ -40,7 +40,9 @@
     	
     	$(document).ready(function(){
     		let session = '${sessionScope.sellername}';
-    		alert(session);
+    		if (session == "") {
+    			location.replace("/test-main/sellerLogin");
+    		}
     	});
     	
     	
@@ -71,7 +73,7 @@
 				<img src='/test-main/homePageImg/cat0.png' width='15'
 					height='15'> ${sessionScope.sellername}</a>
 				<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-				<form name='logoutForm' method='POST' action='sellerLoginServlet'>
+				<form name='logoutForm' method='POST' action='sellerLogin'>
 				<input type='hidden' name='login' value='false'>
 				<li><button class='btn-custom1 dropdown-item' >登出</button></li>
 				</form>
@@ -87,7 +89,7 @@
 	
 	<main>
   <!-- sidebar -->
-  <div class="flex-shrink-0 p-3 bg-white" style="width: 280px; height: 600px;">
+  <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
     <ul class="list-unstyled ps-0">
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
@@ -105,7 +107,7 @@
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">訂單總覽</a></li>
+            <li><a type="button" class="link-dark rounded" onclick="action(this.id)" id="order">訂單總覽</a></li>
             <li><a href="#" class="link-dark rounded">不成立</a></li>
             <li><a href="#" class="link-dark rounded">退貨/退款</a></li>
           </ul>
@@ -132,6 +134,19 @@
   </div>
 </main>
 <script>
+/* 訂單管理相關連結 */
+function action(theId) {
+  var targetHtml = theId;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("content-management").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", targetHtml, true);
+  xhttp.send();
+}
+
 /* 商品管理相關連結 */
 function action(theId) {
   var targetHtml = theId;

@@ -1,6 +1,7 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SellerOrder {
 	private String id; // auto_increment
@@ -8,6 +9,7 @@ public class SellerOrder {
 	private String userId;
 	private String status;
 	private String shippingAddress;
+	private Date createTime;
 	private ArrayList<SellerOrderItem> items;
 	public String getId() {
 		return id;
@@ -45,11 +47,18 @@ public class SellerOrder {
 	public void setItems(ArrayList<SellerOrderItem> items) {
 		this.items = items;
 	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	@Override
 	public String toString() {
 		return "SellerOrder [id=" + id + ", sellerId=" + sellerId + ", userId=" + userId + ", status=" + status
-				+ ", shippingAddress=" + shippingAddress + ", items=" + items + "]";
+				+ ", shippingAddress=" + shippingAddress + ", createTime=" + createTime + ", items=" + items + "]";
 	}
+	
 
 	
 	

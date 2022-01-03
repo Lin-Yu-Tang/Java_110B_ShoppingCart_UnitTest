@@ -298,7 +298,8 @@
 	</div><!-- /.body div -->
 
 	<footer
-		class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+		class="footer mt-auto 
+		d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
 		style="background-color: #e3f2fd;">
 		<p class="col-md-4 mb-0 text-muted">&copy; 2021 狗狗商城 版權所有</p>
 

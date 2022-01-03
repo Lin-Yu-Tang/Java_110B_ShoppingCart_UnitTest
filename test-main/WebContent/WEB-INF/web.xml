@@ -46,14 +46,14 @@
   	<url-pattern>/empty_cart</url-pattern>
   </servlet-mapping>
   
-  <!-- 商品管理頁面相關mapping -->
+  <!-- 賣家管理頁面相關mapping -->
   <servlet>
   	<servlet-name>SellerLoginPageJSP</servlet-name>
   	<jsp-file>/WEB-INF/view/sellerLoginPage.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
   	<servlet-name>SellerLoginPageJSP</servlet-name>
-  	<url-pattern>/sellerLogin</url-pattern>
+  	<url-pattern>/sellerLoginPage</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -100,6 +100,16 @@
   	<servlet-name>ProductManage_UpdateJSP</servlet-name>
   	<url-pattern>/seller/update</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>SellerOrderManageJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/sellerOrderManage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SellerOrderManageJSP</servlet-name>
+  	<url-pattern>/seller/orderPage</url-pattern>
+  </servlet-mapping> 
+  
   <!-- BUGS -->
   <!-- 
    -->
