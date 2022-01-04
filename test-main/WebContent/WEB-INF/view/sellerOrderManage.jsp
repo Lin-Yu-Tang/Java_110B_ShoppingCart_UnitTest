@@ -53,14 +53,7 @@
 </script>
 </head>
 <body>
-
-<div class="row bg-info">placeholder</div>
-<div class="row bg-danger">placeholder</div>
-<div class="row bg-light">placeholder</div>
-<div class="row bg-warning">placeholder</div>
-<div class="row bg-success">placeholder</div>
-
-
+	<h1 class="mb-4" id="title">訂單總覽</h1>
         <div class="row fw-bolder border-bottom bg-info bg-opacity-10">
             <div class="col">訂單編號</div>
             <div class="col">運送地址</div>
@@ -69,7 +62,7 @@
         </div>
 		<c:forEach var="orders" items="${sellerOrders}">
 		<div class="row border border-2 order-div" data-bs-toggle="collapse" data-bs-target="#collapse-${orders.id}"
-        aria-expanded="false">
+        aria-expanded="false" id="title">
             <div class="col">${orders.id}</div>
             <div class="col">${orders.shippingAddress}</div>
             <div class="col">${orders.createTime}</div>

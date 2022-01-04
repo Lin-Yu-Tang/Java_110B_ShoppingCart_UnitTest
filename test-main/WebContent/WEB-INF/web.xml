@@ -80,7 +80,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>ProductManage_ReadJSP</servlet-name>
-  	<url-pattern>/seller/read</url-pattern>
+  	<url-pattern>/seller/readPage</url-pattern>
   </servlet-mapping>
   
   <servlet>
