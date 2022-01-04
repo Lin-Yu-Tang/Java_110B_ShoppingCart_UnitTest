@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +12,6 @@ import java.util.HashMap;
 import com.example.model.Product;
 
 /**
- * 
  * @author Tom Lin
  * @apiNote 實作商品相關的服務(crud)
  */
@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 	/**
-	 * 取得商品所有欄位
+	 * 取得所有商品，首頁載入商品時使用
 	 */
 	@Override
 	public ArrayList<Product> listAllProduct() {
@@ -195,7 +195,7 @@ public class ProductServiceImpl implements ProductService {
 		return tempProduct;
 	}
 	/**
-	 * 更新商品
+	 * 更新特定商品
 	 */
 	
 	@Override
@@ -269,6 +269,9 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
+	/**
+	 * 刪除特定商品
+	 */
 	@Override
 	public void deleteProdct(String id) {
 		Connection conn = null;
@@ -338,6 +341,10 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 	}
+	
+	/**
+	 * 依照關鍵字搜尋商品(商品名稱/商品描述符合條件者)
+	 */
 	@Override
 	public ArrayList<Product> searchProduct(String[] strs) {
 		ArrayList<Product> list = new ArrayList<Product>();
@@ -425,6 +432,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		return list;
 	}
+	
+	/**
+	 * 取得商品當前庫存
+	 * map = {商品Id : 商品數量}
+	 */
 	@Override
 	public HashMap<Integer, Integer> getCurrentStorage(ArrayList<Product> products) {
 		if (products == null) {return null;}
@@ -476,10 +488,77 @@ public class ProductServiceImpl implements ProductService {
 				}
 			}
 		}
-		
-		
 		return map;
 	}
+	
+	/**
+	 * 依賣家ID 取得賣家所有商品
+	 */
+	@Override
+	public ArrayList<Product> getAllProductsBySellerId(String sellerId) {
+		ArrayList<Product> products = new ArrayList<Product>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String SQL_SELECT = "SELECT id,name,picture,price,quantity,description,created_time "
+				+ "FROM product WHERE seller_id = ?";
+		
+		try {
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASSWD);
+			pstmt = conn.prepareStatement(SQL_SELECT);
+			pstmt.setInt(1, Integer.parseInt(sellerId));
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product tempProduct = new Product();
+				tempProduct.setId(Integer.toString(rs.getInt("id")));
+				tempProduct.setName(rs.getString("name"));
+				tempProduct.setPicture(rs.getBlob("picture"));
+				tempProduct.setPrice(rs.getInt("price"));
+				tempProduct.setQuantity(rs.getInt("quantity"));
+				tempProduct.setSeller_id(sellerId);
+				tempProduct.setDescription(rs.getString("description"));
+				tempProduct.setCreated_time(rs.getDate("created_time"));
+				products.add(tempProduct);
+			}
+			
+			rs.close();
+			pstmt.close();
+			conn.close();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return products;
+	}
+	
+	
+	
+	
 	
 }
 

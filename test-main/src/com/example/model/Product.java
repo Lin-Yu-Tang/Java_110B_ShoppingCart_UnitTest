@@ -14,8 +14,8 @@ public class Product {
 	private String seller_id;
 	private String description;
 	// by SQL default
-	private String created_time;
-	private String update_time;
+	private Date created_time;
+	private Date update_time;
 	public String getId() {
 		return id;
 	}
@@ -58,11 +58,17 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCreated_time() {
+	public Date getCreated_time() {
 		return created_time;
 	}
-	public String getUpdate_time() {
+	public Date getUpdate_time() {
 		return update_time;
+	}
+	public void setCreated_time(Date created_time) {
+		this.created_time = created_time;
+	}
+	public void setUpdate_time(Date update_time) {
+		this.update_time = update_time;
 	}
 	@Override
 	public String toString() {

@@ -8,7 +8,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache, no-store">
 <meta http-equiv="expires" content="0">
-<title>狗狗商城</title>
+<title>狗狗商城 - 賣家中心</title>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -53,6 +53,7 @@
 </script>
 </head>
 <body>
+	<div class="container-fluid" id="content-management">
 	<h1 class="mb-4" id="title">訂單總覽</h1>
         <div class="row fw-bolder border-bottom bg-info bg-opacity-10">
             <div class="col">訂單編號</div>
@@ -92,5 +93,6 @@
         	</div>
         
 		</c:forEach>
+		</div>
 </body>
 </html>

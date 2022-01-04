@@ -98,7 +98,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>ProductManage_UpdateJSP</servlet-name>
-  	<url-pattern>/seller/update</url-pattern>
+  	<url-pattern>/seller/updatePage</url-pattern>
   </servlet-mapping>
   
   <servlet>

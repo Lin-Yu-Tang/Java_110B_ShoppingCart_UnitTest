@@ -34,7 +34,7 @@ public class ListAllProductServlet extends HttpServlet {
 		
 		request.setAttribute("allProducts", listAllProduct);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("readPage");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("displayProducts.jsp");
 		
 		dispatcher.forward(request, response);
 		

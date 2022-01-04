@@ -5,20 +5,14 @@ import java.util.ArrayList;
 import com.example.dao.ProductServiceImpl;
 import com.example.model.Product;
 
-public class TestSearch {
+public class TestSellerReadProduct {
+
 	public static void main(String[] args) {
-		
 		ProductServiceImpl service = new ProductServiceImpl();
 		
+		ArrayList<Product> products = service.getAllProductsBySellerId("1");
 		
-		String[] strs = {"蘋果"};
-		System.out.println("關鍵字: " + strs[0]);
-		ArrayList<Product> products = service.searchProduct(strs);
-		
-		for (Product p:products) {
-			System.out.println(p.toString());
-		}
-		
-		
+		System.out.println(products);
 	}
+
 }

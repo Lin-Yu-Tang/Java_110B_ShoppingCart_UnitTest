@@ -68,17 +68,18 @@ shoppingCart.jsp點選結帳 -> CheckoutServlet
 賣家管理頁面: 
 1. 基本資料管理 
 2. 訂單管理 sellerManage.jsp -> SellerOrderManageServlet -> sellerOrderManage.jsp
-
-
 3. 商品管理: ProductManageServlet
 sellerManage.jsp -> productManageCreate.jsp (新增), productManageUpdate.jsp (修改), productManageRead.jsp (瀏覽與刪除)
 
+
 Note:
 1. 商品管理更新內容:
-瀏覽: read -> ListAllProductServlet -> productManageRead.jsp
 
-
-
+	1. 瀏覽: sellerManage.jsp (read) -> SellerProductReadServlet -> productManageRead.jsp
+	2. 編輯商品: 
+	* sellerManage.jsp (update) -> SellerProductUpdateServlet -> productManageUpdate.jsp
+	* productManageRead.jsp 點選個別商品操作按鈕 -> SellerProductUpdateServlet -> productManageUpdate.jsp
+2. 其他:
 
 
 

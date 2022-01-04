@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="author" content="Tom Lin">
 <meta charset="UTF-8">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache, no-store">
 <meta http-equiv="expires" content="0">
-<title>狗狗商城</title>
+<title>狗狗商城 - 賣家中心</title>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -143,30 +144,19 @@
 
 		<!-- Content -->
 		<div class="container-fluid p-5" id="content-management">
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  		<strong>注意:</strong> 目前網站建置中，部分功能無法使用
-  		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
+			<div class="alert alert-warning alert-dismissible fade show"
+				role="alert">
+				<strong>注意:</strong> 目前網站建置中，部分功能無法使用
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
 			<h1>歡迎賣家管理首頁</h1>
 			<div>seller home page content</div>
 
 		</div>
 
 	</main>
-	<script>
-		/* 商品管理相關連結 */
-		function action(theId) {
-			var targetHtml = theId;
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					document.getElementById("content-management").innerHTML = this.responseText;
-				}
-			};
-			xhttp.open("GET", "seller/" + targetHtml, true);
-			xhttp.send();
-		}
-	</script>
+
 
 
 
@@ -192,5 +182,32 @@
 		</ul>
 	</footer>
 	
+	
+	<script>
+		/* 商品管理相關連結 */
+		function action(theId) {
+			var targetHtml = theId;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("content-management").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "seller/" + targetHtml, true);
+			xhttp.send();
+		}
+
+		/* productManageRead.jsp 的修改button*/
+		function editBtn(theId) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("content-management").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "seller/update?PID=" + theId, true);
+			xhttp.send();
+		}
+	</script>
 </body>
 </html>

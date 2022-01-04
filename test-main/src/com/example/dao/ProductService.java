@@ -20,4 +20,6 @@ public interface ProductService {
 	public ArrayList<Product> searchProduct(String[] strs);
 	
 	public HashMap<Integer, Integer> getCurrentStorage(ArrayList<Product> products);
+	
+	public ArrayList<Product> getAllProductsBySellerId(String sellerId);
 }

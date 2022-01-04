@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container-fluid" id="content-management">
 	<h1>新增商品</h1>
 	<div>122222222222222222222222222222222222222222222222222222222222222222222222222222222</div>
 	
@@ -161,5 +162,6 @@
 
         人生如夢，一尊還酹江月。
     </div>
+</div>
 </body>
 </html>
