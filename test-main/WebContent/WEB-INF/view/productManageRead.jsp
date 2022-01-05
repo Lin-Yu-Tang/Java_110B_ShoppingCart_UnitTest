@@ -24,7 +24,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <style>
-    img:hover{
+    .product-img:hover{
         width: 200px;
         height: 200px;
     }
@@ -53,10 +53,10 @@
 			<td>${product.name}</td>
 			<td>${product.price}</td>
 			<td>${product.quantity}</td>
-			<td><img src="showImage?pnum=${product.id}" width="150" height="150"></td>
+			<td><img class="product-img" src="showImage?pnum=${product.id}" width="150" height="150"></td>
 			<td>${product.description}</td>
 			<td><button class="btn" type="button" onclick="editBtn(this.value)" value="${product.id}">修改</button></td>
-			<td><button class="btn" type="button" onclick="selectBtn(this.value)" value="${product.id}">刪除</button></td>
+			<td><button class="btn" type="button" onclick="deleteBtn(this.value)" value="${product.id}">刪除</button></td>
 		</tr>
 		</c:forEach>
 		</tbody>

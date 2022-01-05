@@ -76,21 +76,17 @@
 					src='/test-main/homePageImg/cat0.png' width='15' height='15'>
 					${sessionScope.sellername}
 			</a>
-				<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
+				<div class="dropdown-menu">
 					<form name='logoutForm' method='POST' action='sellerLogin'>
 						<input type='hidden' name='login' value='false'>
-						<li><button class='btn-custom1 dropdown-item'>登出</button></li>
+						<button class='btn-custom1 dropdown-item'>登出</button>
 					</form>
-				</ul>
+				</div>
 			</span>
 		</div>
 	</nav>
 	<script>
-		/* 登出trigger */
-		var button = document.querySelector("form[name='logoutForm'] > button");
-		button.addEventListener(function() {
-			document.querySelector("form[name='logoutForm']").submit();
-		});
+
 	</script>
 
 	<main class="flex-shrink-0 overflow-scroll" style="min-height: 600px;">
@@ -184,6 +180,14 @@
 	
 	
 	<script>
+		/* 登出trigger */
+		var button = document.querySelector("form[name='logoutForm'] > button");
+		button.addEventListener(function() {
+		document.querySelector("form[name='logoutForm']").submit();
+		});
+		
+		
+		
 		/* 商品管理相關連結 */
 		function action(theId) {
 			var targetHtml = theId;
@@ -197,6 +201,8 @@
 			xhttp.send();
 		}
 
+		
+		
 		/* productManageRead.jsp 的修改button*/
 		function editBtn(theId) {
 			var xhttp = new XMLHttpRequest();
@@ -208,6 +214,15 @@
 			xhttp.open("GET", "seller/update?PID=" + theId, true);
 			xhttp.send();
 		}
+		
+		
+		
+		/* 商品內容 */
+		var button = document.querySelector("form[name='product-update'] > button[name='processForm']");
+		button.addEventListener(function() {
+		document.querySelector("form[name='product-update']").submit();
+		});
+		
 	</script>
 </body>
 </html>

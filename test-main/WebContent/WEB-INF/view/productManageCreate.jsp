@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="author" content="Tom Lin">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

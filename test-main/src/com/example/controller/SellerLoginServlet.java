@@ -67,14 +67,15 @@ public class SellerLoginServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		SellerLoginVerifyService service = new SellerLoginVerifyService();
-		String sellerAccount = request.getParameter("sellerAccount");
-		String sellerPasswd = request.getParameter("passwd");
 		String action = request.getParameter("login");
 		String autoLogin = request.getParameter("autologin");
 		System.out.println("=========sellerLogin POST==========");
 
 		// 登入程序
 		if (action.equals("true")) {
+			String sellerAccount = request.getParameter("sellerAccount").toLowerCase();
+			String sellerPasswd = request.getParameter("passwd");
+
 			if (!service.loginCheck(sellerAccount, sellerPasswd)) {
 				response.sendRedirect("sellerLogin");
 			} else {
