@@ -89,7 +89,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>ProductManage_CreateJSP</servlet-name>
-  	<url-pattern>/seller/create</url-pattern>
+  	<url-pattern>/seller/createPage</url-pattern>
   </servlet-mapping>
   
   <servlet>

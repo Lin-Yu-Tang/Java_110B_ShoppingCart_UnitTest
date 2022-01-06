@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,161 +9,76 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container-fluid" id="content-management">
-	<h1>新增商品</h1>
-	<div>122222222222222222222222222222222222222222222222222222222222222222222222222222222</div>
-	
-	    <h3>水調歌頭 · 明月幾時有</h3>
-    <div>
-        丙辰中秋，歡飲達旦，大醉，作此篇，兼懷子由。<br><br>
+	<div class="container-fluid" id="content-management">
+		<h1>新增商品</h1>
+		<div>
+			<form class="form" name="product-create" method="POST"
+				action="seller/create" enctype="multipart/form-data">
 
-        明月幾時有？把酒問青天。不知天上宮闕，今夕是何年。<br><br>
-        我欲乘風歸去，又恐瓊樓玉宇，高處不勝寒。起舞弄清影，何似在人間？<br><br>
+				<div class="row g-3 align-items-center mb-2">
+					<div class="col-1">
+						<label for="new-product-name" class="col-form-label">商品名稱:
+						</label>
+					</div>
+					<div class="col-auto">
+						<input type="text" id="new-product-name" class="form-control"
+							name="name">
+					</div>
+				</div>
 
-        轉朱閣，低綺戶，照無眠。<br><br>
-        不應有恨，何事長向別時圓？<br><br>
-        人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。
+				<div class="row g-3 align-items-center mb-2">
+					<div class="col-1">
+						<label for="new-product-price" class="col-form-label">價格:
+						</label>
+					</div>
+					<div class="col-auto">
+						<input type="text" id="new-product-price" class="form-control"
+							name="price">
+					</div>
+				</div>
 
-    </div>
-    <br>
-    <h3>念奴嬌 · 赤壁懷古</h3>
-    <div>
-        大江東去，浪淘盡，千古風流人物。<br><br>
+				<div class="row g-3 align-items-center mb-2">
+					<div class="col-1">
+						<label for="new-product-quantity" class="col-form-label">數量:
+						</label>
+					</div>
+					<div class="col-auto">
+						<input type="text" id="new-product-quantity" class="form-control"
+							name="quantity">
+					</div>
+				</div>
 
-        故壘西邊，人道是，三國周郎赤壁。<br><br>
+				<div class="row g-3 align-items-center mb-2">
+					<div class="col-1">
+						<label for="newProductImgInput" class="form-label">更新圖片: </label>
+					</div>
+					<div class="col-auto">
+						<input class="form-control" type="file" name="picture"
+							id="newProductImgInput">
+					</div>
+					<div class="col-auto">
+						<p id="new-product-img"></p>
+					</div>
+				</div>
 
-        亂石穿空，驚濤拍岸，捲起千堆雪。<br><br>
+				<div class="row g-3 align-items-center mb-2">
+					<div class="col-1">
+						<label for="new-product-desc">描述: </label>
+					</div>
+					<div class="col-5">
+						<textarea class="form-control" id="new-product-desc" name="desc"
+							style="height: 100px"></textarea>
+					</div>
+				</div>
 
-        江山如畫，一時多少豪傑。<br><br>
+				<div class="btn-group" role="group">
+					<button name="processForm" type="submit" class="btn btn-success">送出修改</button>
+					<button name="cancel" id="cancel" type="button"
+						class="btn btn-outline-secondary">取消</button>
+				</div>
 
-        遙想公瑾當年，小喬初嫁了，雄姿英發。<br><br>
-
-        羽扇綸巾，談笑間，檣櫓灰飛煙滅。<br><br>
-
-        故國神遊，多情應笑我，早生華髮。<br><br>
-
-        人生如夢，一尊還酹江月。
-    </div>    <h3>水調歌頭 · 明月幾時有</h3>
-    <div>
-        丙辰中秋，歡飲達旦，大醉，作此篇，兼懷子由。<br><br>
-
-        明月幾時有？把酒問青天。不知天上宮闕，今夕是何年。<br><br>
-        我欲乘風歸去，又恐瓊樓玉宇，高處不勝寒。起舞弄清影，何似在人間？<br><br>
-
-        轉朱閣，低綺戶，照無眠。<br><br>
-        不應有恨，何事長向別時圓？<br><br>
-        人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。
-
-    </div>
-    <br>
-    <h3>念奴嬌 · 赤壁懷古</h3>
-    <div>
-        大江東去，浪淘盡，千古風流人物。<br><br>
-
-        故壘西邊，人道是，三國周郎赤壁。<br><br>
-
-        亂石穿空，驚濤拍岸，捲起千堆雪。<br><br>
-
-        江山如畫，一時多少豪傑。<br><br>
-
-        遙想公瑾當年，小喬初嫁了，雄姿英發。<br><br>
-
-        羽扇綸巾，談笑間，檣櫓灰飛煙滅。<br><br>
-
-        故國神遊，多情應笑我，早生華髮。<br><br>
-
-        人生如夢，一尊還酹江月。
-    </div>    <h3>水調歌頭 · 明月幾時有</h3>
-    <div>
-        丙辰中秋，歡飲達旦，大醉，作此篇，兼懷子由。<br><br>
-
-        明月幾時有？把酒問青天。不知天上宮闕，今夕是何年。<br><br>
-        我欲乘風歸去，又恐瓊樓玉宇，高處不勝寒。起舞弄清影，何似在人間？<br><br>
-
-        轉朱閣，低綺戶，照無眠。<br><br>
-        不應有恨，何事長向別時圓？<br><br>
-        人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。
-
-    </div>
-    <br>
-    <h3>念奴嬌 · 赤壁懷古</h3>
-    <div>
-        大江東去，浪淘盡，千古風流人物。<br><br>
-
-        故壘西邊，人道是，三國周郎赤壁。<br><br>
-
-        亂石穿空，驚濤拍岸，捲起千堆雪。<br><br>
-
-        江山如畫，一時多少豪傑。<br><br>
-
-        遙想公瑾當年，小喬初嫁了，雄姿英發。<br><br>
-
-        羽扇綸巾，談笑間，檣櫓灰飛煙滅。<br><br>
-
-        故國神遊，多情應笑我，早生華髮。<br><br>
-
-        人生如夢，一尊還酹江月。
-    </div>    <h3>水調歌頭 · 明月幾時有</h3>
-    <div>
-        丙辰中秋，歡飲達旦，大醉，作此篇，兼懷子由。<br><br>
-
-        明月幾時有？把酒問青天。不知天上宮闕，今夕是何年。<br><br>
-        我欲乘風歸去，又恐瓊樓玉宇，高處不勝寒。起舞弄清影，何似在人間？<br><br>
-
-        轉朱閣，低綺戶，照無眠。<br><br>
-        不應有恨，何事長向別時圓？<br><br>
-        人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。
-
-    </div>
-    <br>
-    <h3>念奴嬌 · 赤壁懷古</h3>
-    <div>
-        大江東去，浪淘盡，千古風流人物。<br><br>
-
-        故壘西邊，人道是，三國周郎赤壁。<br><br>
-
-        亂石穿空，驚濤拍岸，捲起千堆雪。<br><br>
-
-        江山如畫，一時多少豪傑。<br><br>
-
-        遙想公瑾當年，小喬初嫁了，雄姿英發。<br><br>
-
-        羽扇綸巾，談笑間，檣櫓灰飛煙滅。<br><br>
-
-        故國神遊，多情應笑我，早生華髮。<br><br>
-
-        人生如夢，一尊還酹江月。
-    </div>    <h3>水調歌頭 · 明月幾時有</h3>
-    <div>
-        丙辰中秋，歡飲達旦，大醉，作此篇，兼懷子由。<br><br>
-
-        明月幾時有？把酒問青天。不知天上宮闕，今夕是何年。<br><br>
-        我欲乘風歸去，又恐瓊樓玉宇，高處不勝寒。起舞弄清影，何似在人間？<br><br>
-
-        轉朱閣，低綺戶，照無眠。<br><br>
-        不應有恨，何事長向別時圓？<br><br>
-        人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。
-
-    </div>
-    <br>
-    <h3>念奴嬌 · 赤壁懷古</h3>
-    <div>
-        大江東去，浪淘盡，千古風流人物。<br><br>
-
-        故壘西邊，人道是，三國周郎赤壁。<br><br>
-
-        亂石穿空，驚濤拍岸，捲起千堆雪。<br><br>
-
-        江山如畫，一時多少豪傑。<br><br>
-
-        遙想公瑾當年，小喬初嫁了，雄姿英發。<br><br>
-
-        羽扇綸巾，談笑間，檣櫓灰飛煙滅。<br><br>
-
-        故國神遊，多情應笑我，早生華髮。<br><br>
-
-        人生如夢，一尊還酹江月。
-    </div>
-</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

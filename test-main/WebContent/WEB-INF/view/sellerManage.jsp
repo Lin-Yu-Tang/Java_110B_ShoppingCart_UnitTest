@@ -179,10 +179,10 @@
 	
 	<script>
 		/* 登出trigger */
-		var button = document.querySelector("form[name='logoutForm'] > button");
-		button.addEventListener(function() {
+		var btnLogout = document.querySelector("form[name='logoutForm'] > button");
+		btnLogout.addEventListener("click", function() {
 		document.querySelector("form[name='logoutForm']").submit();
-		});
+		}, false);
 		
 		
 		
@@ -217,11 +217,11 @@
 		
 		/* 商品內容 */
 		
-		/* 更新商品表單送出 */
-		var button = document.querySelector("form[name='product-update'] > button[name='processForm']");
-		button.addEventListener(function() {
-		document.querySelector("form[name='product-update']").submit();
-		});
+		/* 送出更新商品表單 */
+		var btnProductUpdate = document.querySelector("form[name='product-update'] > button[name='processForm']");
+		btnProductUpdate.addEventListener("click", function() {
+			document.querySelector("form[name='product-update']").submit();
+		}, false);
 		
 		/* 商品更新，圖檔上傳立即載入 */
 		updateProductImgInput.onchange = evt => {
@@ -233,7 +233,29 @@
             }
         }
 		
+		/* 送出新增商品表單 */
+		var btnProductCreate = document.querySelector("form[name='product-create'] > button[name='processForm']");
+		btnProductCreate.addEventListener("click", function() {
+			document.querySelector("form[name='product-create']").submit();
+		}, false);
+		
+		var btnProductCreateCancel = document.querySelector("form[name='product-create'] > button[name='cancel']");
+		btnProductCreateCancel.addEventListener("click", function() {
+			location.replace("/test-main/seller");
+		}, false);
+		
+		/* 新增商品，圖檔上傳立即載入 */
+		newProductImgInput.onchange = evt => {
+            const [file] = newProductImgInput.files;
 
+            $("#new-product-img").html("<img id='newProductImg' src='#'  width='300px' height='300px'>");
+            if (file) {
+            	newProductImg.src = URL.createObjectURL(file);
+            }
+        }
+		
+		
+		
 	</script>
 </body>
 </html>

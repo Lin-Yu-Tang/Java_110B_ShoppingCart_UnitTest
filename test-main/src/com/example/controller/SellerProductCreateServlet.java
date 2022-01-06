@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
@@ -22,44 +23,38 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
 import com.example.dao.ProductServiceImpl;
+import com.example.dao.SellerServiceImpl;
 import com.example.model.Product;
 
 /**
  * @author Tom Lin
- * @apiNote 導向商品更新頁面 & 商品更新存取置資料庫
+ * @apiNote doGet: seller home page -> 新增商品； doPost: 寫入新增商品表單至資料庫
  */
-@WebServlet("/seller/update")
-public class SellerProductUpdateServlet extends HttpServlet {
+@WebServlet("/seller/create")
+public class SellerProductCreateServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
-		String pid = request.getParameter("PID");
-		
-//		System.out.println("product update: " + pid);
-		
-		// TODO: 將商品資料導向編輯商品頁面
-		if (pid != null) {
-		ProductServiceImpl service = new ProductServiceImpl();
-		Product product = service.selectOneProduct(pid);
-		request.setAttribute("theProduct", product);
-		}
-		
-		
-		request.getRequestDispatcher("updatePage").forward(request, response);
-		
-		
+		response.sendRedirect("createPage");
 	}
-	
+
 	/**
-	 * 更新商品表單接收
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-//		System.out.println("seller update");
+//		System.out.println("新增商品~~~");
 		
+		
+		SellerServiceImpl sellerService = new SellerServiceImpl();
+		
+		HttpSession session = request.getSession();
+		
+		String sellerId = sellerService.getSellerId((String) session.getAttribute("SID"));
+		
+//		System.out.println(sellerId);
 		
 		ProductServiceImpl service = new ProductServiceImpl();
 		// Create a factory for disk-based file items
@@ -72,49 +67,37 @@ public class SellerProductUpdateServlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// Parse the request
 		InputStream pictureIs = null;
+		
 		try {
 			List<FileItem> items = upload.parseRequest(request);
 			
-			System.out.println("items size: " + items.size());
+//			System.out.println("items size: " + items.size());
 			
-			String id = items.get(0).getString("UTF-8");
-			String name = items.get(1).getString("UTF-8");
-			String price = items.get(2).getString();
-			String quantity = items.get(3).getString();
+			String name = items.get(0).getString("UTF-8");
+			String price = items.get(1).getString();
+			String quantity = items.get(2).getString();
 			
-			pictureIs = items.get(4).getInputStream();
+			pictureIs = items.get(3).getInputStream();
 			byte[] bytes = IOUtils.toByteArray(pictureIs);
-//			System.out.println("picture bytes size: " + bytes.length);
 			
-			String desc = items.get(5).getString("UTF-8");
-//			System.out.println("取得編輯後檔案:");
-//			System.out.println("id:" + id);
-//			System.out.println("name: " + name);
-//			System.out.println("price: " + price);
-//			System.out.println("quantity: " + quantity);
-//			System.out.println("pictureIs: " + pictureIs);
-//			System.out.println("desc: " + desc);
+			String desc = items.get(4).getString("UTF-8");
 			
-			// 取出商品原本內容
-			Product tempProduct = service.selectOneProduct(id);
+			// 寫入商品bean中
+			Product tempProduct = new Product();
 			tempProduct.setName(name);
 			tempProduct.setPrice(Integer.parseInt(price));
 			tempProduct.setQuantity(Integer.parseInt(quantity));
+			tempProduct.setPicture(new SerialBlob(bytes));
 			tempProduct.setDescription(desc);
-			
-//			if (picClass.equals("class java.io.ByteArrayInputStream")) {
-//				System.out.println("未更新圖檔!!");
-//			}
-			if (bytes.length != 0) {
-				// 更新圖檔
-//				System.out.println("有更新圖檔");
-				tempProduct.setPicture(new SerialBlob(bytes));
-			}
-			// update date to database
-			service.updateProduct(tempProduct);
+			tempProduct.setSeller_id(sellerId);
 			
 			
-			pictureIs.close();
+//			System.out.println(tempProduct);
+			
+			
+			// 寫入資料庫
+			service.saveProduct(tempProduct);
+			
 		}catch (FileUploadException e) {
 			e.printStackTrace();
 		}catch (SerialException e) {
@@ -130,4 +113,5 @@ public class SellerProductUpdateServlet extends HttpServlet {
 		
 		response.sendRedirect(getServletContext().getContextPath() + "/seller");
 	}
+
 }
