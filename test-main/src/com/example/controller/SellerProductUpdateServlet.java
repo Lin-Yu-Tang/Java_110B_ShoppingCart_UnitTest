@@ -71,66 +71,63 @@ public class SellerProductUpdateServlet extends HttpServlet {
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// Parse the request
+		InputStream pictureIs = null;
 		try {
 			List<FileItem> items = upload.parseRequest(request);
-			request.getParameter("picture");
-			if (items.get(3).getString("UTF-8").equals("")) {
-				// 沒有更新圖片
-				String name = items.get(0).getString("UTF-8");
-				String price = items.get(1).getString();
-				String quantity = items.get(2).getString();
-				String desc = items.get(4).getString("UTF-8");
-				String id = items.get(5).getString("UTF-8");
-//				System.out.println("取得編輯後檔案:");
-//				System.out.println("id:" + id);
-//				System.out.println("name: " + name);
-//				System.out.println("price: " + price);
-//				System.out.println("desc: " + desc);
-				
-				Product tempProduct = service.selectOneProduct(id);
-				tempProduct.setName(name);
-				tempProduct.setPrice(Integer.parseInt(price));
-				tempProduct.setQuantity(Integer.parseInt(quantity));
-				tempProduct.setDescription(desc);
-				service.updateProduct(tempProduct);
-				
-			} else {
-				// 有更新圖片
-				String name = items.get(0).getString("UTF-8");
-				String price = items.get(1).getString();
-				String quantity = items.get(2).getString();
-				InputStream pictureIs = items.get(3).getInputStream();
-				String desc = items.get(4).getString("UTF-8");
-				String id = items.get(5).getString("UTF-8");
-//				System.out.println("取得編輯後檔案:(有圖檔)");
-//				System.out.println("id:" + id);
-//				System.out.println("name: " + name);
-//				System.out.println("price: " + price);
-//				System.out.println("pictureIs" + pictureIs);
-//				System.out.println("desc: " + desc);
-				
-				Product tempProduct = service.selectOneProduct(id);
-				tempProduct.setName(name);
-				tempProduct.setPrice(Integer.parseInt(price));
-				tempProduct.setQuantity(Integer.parseInt(quantity));
-				tempProduct.setDescription(desc);
-				byte[] bytes = IOUtils.toByteArray(pictureIs);
-				try {
-					tempProduct.setPicture(new SerialBlob(bytes));
-				} catch (SerialException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				service.updateProduct(tempProduct);
+			
+			System.out.println("items size: " + items.size());
+			
+			String id = items.get(0).getString("UTF-8");
+			String name = items.get(1).getString("UTF-8");
+			String price = items.get(2).getString();
+			String quantity = items.get(3).getString();
+			
+			pictureIs = items.get(4).getInputStream();
+			byte[] bytes = IOUtils.toByteArray(pictureIs);
+//			System.out.println("picture bytes size: " + bytes.length);
+			
+			String desc = items.get(5).getString("UTF-8");
+//			System.out.println("取得編輯後檔案:");
+//			System.out.println("id:" + id);
+//			System.out.println("name: " + name);
+//			System.out.println("price: " + price);
+//			System.out.println("quantity: " + quantity);
+//			System.out.println("pictureIs: " + pictureIs);
+//			System.out.println("desc: " + desc);
+			
+			// 取出商品原本內容
+			Product tempProduct = service.selectOneProduct(id);
+			tempProduct.setName(name);
+			tempProduct.setPrice(Integer.parseInt(price));
+			tempProduct.setQuantity(Integer.parseInt(quantity));
+			tempProduct.setDescription(desc);
+			
+//			if (picClass.equals("class java.io.ByteArrayInputStream")) {
+//				System.out.println("未更新圖檔!!");
+//			}
+			if (bytes.length != 0) {
+				// 更新圖檔
+//				System.out.println("有更新圖檔");
+				tempProduct.setPicture(new SerialBlob(bytes));
 			}
-		} catch (FileUploadException e) {
+			// update date to database
+			service.updateProduct(tempProduct);
+			
+			
+			pictureIs.close();
+		}catch (FileUploadException e) {
 			e.printStackTrace();
+		}catch (SerialException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (pictureIs != null) {
+				pictureIs.close();
+			}
 		}
 		
 		
 		response.sendRedirect(getServletContext().getContextPath() + "/seller");
-		
-		
 	}
 }

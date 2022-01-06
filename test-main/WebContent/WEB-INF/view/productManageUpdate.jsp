@@ -14,9 +14,8 @@
         <div class="text-center pb-3 mb-3 border-bottom">
         <!-- header -->
             <h1>商品更新頁面</h1>
-
-				
-			<!-- 搜尋商品 -->				
+            
+			<!-- 搜尋商品 -->
         	<div class="input-group mb-3 px-5">
             	<input type="text" class="form-control" placeholder="請輸入商品Id">
             	<button type="button" class="btn btn-outline-secondary">搜尋</button>
@@ -30,7 +29,8 @@
 		<c:if test="${theProduct != null }">
 		<form class="form" name="product-update" method="POST" action="seller/update" enctype="multipart/form-data">
 			
-			<input type="hidden" name="id" value="${theProduct.id}">
+			<!-- hidden value -->
+			<input type="hidden" name="id" value="${theProduct.id}" >
 			
         <div class="row g-3 align-items-center mb-2">
             <div class="col-1">
@@ -67,13 +67,19 @@
                 <img src="showImage?pnum=${theProduct.id}" width="300" height="300">
             </div>
         </div>
-
+        	
+			
+			
+			
         <div class="row g-3 align-items-center mb-2">
             <div class="col-1">
-                <label for="product-img" class="form-label">更新圖片: </label>
+                <label for="updateProductImgInput" class="form-label">更新圖片: </label>
             </div>
             <div class="col-auto">
-                <input class="form-control" type="file" id="product-img" name="picture">
+                <input class="form-control" type="file" name="picture" id="updateProductImgInput">
+            </div>
+            <div class="col-auto">
+				<p id="fileupload-product-img"></p>            
             </div>
         </div>
 
@@ -82,7 +88,7 @@
                 <label for="product-desc">描述: </label>
             </div>
             <div class="col-5">
-                <textarea class="form-control" id="product-desc" style="height: 100px">${theProduct.description}</textarea>
+                <textarea class="form-control" id="product-desc" name="desc" style="height: 100px">${theProduct.description}</textarea>
             </div>
         </div>
 
@@ -95,7 +101,6 @@
 		
 		</c:if>
         </div>
-
 </div>
 </body>
 </html>
