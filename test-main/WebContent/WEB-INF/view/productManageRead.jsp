@@ -56,7 +56,7 @@
 			<td><img class="product-img" src="showImage?pnum=${product.id}" width="150" height="150"></td>
 			<td>${product.description}</td>
 			<td><button class="btn" type="button" onclick="editBtn(this.value)" value="${product.id}">修改</button></td>
-			<td><button class="btn" type="button" onclick="deleteBtn(this.value)" value="${product.id}">刪除</button></td>
+			<td><button class="btn" type="button" onclick="deleteProduct(this.value)" value="${product.id}">刪除</button></td>
 		</tr>
 		</c:forEach>
 		</tbody>

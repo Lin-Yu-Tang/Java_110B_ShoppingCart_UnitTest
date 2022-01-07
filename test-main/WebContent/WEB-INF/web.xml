@@ -110,6 +110,15 @@
   	<url-pattern>/seller/orderPage</url-pattern>
   </servlet-mapping> 
   
+  
+  <servlet>
+  	<servlet-name>SellerInfoJSP</servlet-name>
+  	<jsp-file>/WEB-INF/view/sellerInfo.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SellerInfoJSP</servlet-name>
+  	<url-pattern>/seller/basic</url-pattern>
+  </servlet-mapping>   
   <!-- BUGS -->
   <!-- 
    -->

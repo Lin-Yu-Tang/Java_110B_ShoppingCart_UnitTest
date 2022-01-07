@@ -101,7 +101,8 @@
 						aria-expanded="false">基本資料維護</button>
 					<div class="collapse" id="home-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" class="link-dark rounded">基本資料</a></li>
+							<li><a type="button" class="link-dark rounded"
+								onclick="action(this.id)" id="basic">基本資料</a></li>
 						</ul>
 					</div>
 				</li>
@@ -186,7 +187,7 @@
 		
 		
 		
-		/* 商品管理相關連結 */
+		/* sidebar 相關連結 */
 		function action(theId) {
 			var targetHtml = theId;
 			var xhttp = new XMLHttpRequest();
@@ -254,7 +255,22 @@
             }
         }
 		
-		
+		/* 取消按鈕 網頁轉址: 回到賣家首頁 */
+		function homeClick(){
+			let confirmCancel = confirm("您要取消此次修改嗎? (確認後回到賣家首頁)")
+			if (confirmCancel == true) {
+				window.location.replace("/test-main/seller");
+			}
+		}
+        
+        /* 刪除按鈕 */
+		function deleteProduct(theId) {
+			let deleteMsg = prompt("確定要刪除此商品嗎?(確認刪除請輸入: 我要刪除此項商品)", "");
+            if (deleteMsg == "我要刪除此項商品") {
+                alert("刪除商品成功!!");
+				location.href = "seller/delete?pid=" + theId;
+            }
+        }
 		
 	</script>
 </body>

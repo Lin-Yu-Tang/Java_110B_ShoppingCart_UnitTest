@@ -94,8 +94,8 @@
 
 		<div class="btn-group" role="group">
 			<button name="processForm" type="submit" class="btn btn-success">送出修改</button>
-			<button name="cancel" id="cancel" type="button" class="btn btn-outline-secondary">取消</button>
-			<button name="delete" id="deleteAct" type="button" class="btn btn-outline-danger">刪除</button>
+			<button name="cancel" id="cancel" type="button" class="btn btn-outline-secondary" onclick="homeClick()">取消</button>
+			<button name="delete" id="deleteAct" type="button" class="btn btn-outline-danger" onclick="deleteProduct(this.value)"  value="${theProduct.id}">刪除</button>
 		</div>
 		</form>
 		

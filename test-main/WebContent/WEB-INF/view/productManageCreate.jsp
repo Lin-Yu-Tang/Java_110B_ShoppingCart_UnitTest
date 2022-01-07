@@ -74,7 +74,8 @@
 				<div class="btn-group" role="group">
 					<button name="processForm" type="submit" class="btn btn-success">送出修改</button>
 					<button name="cancel" id="cancel" type="button"
-						class="btn btn-outline-secondary">取消</button>
+						class="btn btn-outline-secondary"
+						onclick="homeClick()">取消</button>
 				</div>
 
 			</form>
