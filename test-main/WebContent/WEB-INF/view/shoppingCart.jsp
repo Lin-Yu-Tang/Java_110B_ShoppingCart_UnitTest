@@ -21,27 +21,12 @@
 <title>狗狗商城</title>
 <style>
 
-
-.testdiv {
-	border: 5px outset red;
-}
-
-.testdiv2 {
-	border: 3px dashed greenyellow;
-}
-
+/* 商品CSS */
 .prices {
 	color: red;
 }
 
-.productImg {
-	height: 300px;
-	width: 300px;
-}
 
-.carousel-inner {
-	height: 550px;
-}
 /* Custom button CSS */
 .btn-custom {
 	color: black;
@@ -103,7 +88,7 @@
 </script>
 </head>
 <body>
-	<nav class="navbar  sticky-top navbar-expand-lg navbar-light"
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light"
 		style="background-color: #e3f2fd;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/test-main"> <img
@@ -119,9 +104,10 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
-				<form class="d-flex">
+			<!-- 搜尋功能 -->
+				<form class="d-flex" method="GET" action="search">
 					<input class="form-control me-2" type="search"
-						placeholder="輸入商品名稱或關鍵字..." aria-label="Search" size="70">
+						placeholder="輸入商品名稱或關鍵字..." aria-label="Search" size="70" name="keywords">
 					<button class="btn btn-outline-success" type="submit">
 						<img src="homePageImg/magnifying-glass.png" width="25" height="25">
 					</button>
@@ -140,42 +126,6 @@
 				<a class="nav-link" href="#"
 				style="color: black;" onmouseover="turnOnlight(this)"
 				onmouseout="turnOfflight(this)">賣家中心</a>
-
-			<script>
-				let loginTag = "<span class='dropdown'>"
-						+ "<a class='nav-link py-0 dropdown-toggle' data-bs-toggle='dropdown'"
-						+ "href='#' style='color: black;' "
-						+ "onmouseover='turnOnlight(this)' onmouseout='turnOfflight(this)'>"
-						+ "<img src='/test-main/homePageImg/cat0.png' width='15'"
-           			+"height='15'> ${sessionScope.username}</a>"
-						+ "<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>"
-						+ "<li><a class='dropdown-item' href='#'>會員中心</a></li>"
-						+ "<form name='logoutForm' method='POST' action='loginServlet'>"
-						+ "<input type='hidden' name='login' value='false'>"
-						+ "<input type='hidden' id='logoutCurrentUrl' name='loginCurrentUrl'>"
-						+ "<li><button class='btn-custom1 dropdown-item' >登出</button></li>"
-						+ "</form>"
-						+ "<script> var button = document.querySelector('form[name='logoutForm'] > button');"
-						+ "button.addEventListener(function(){"
-						+ "document.querySelector('form[name='logoutForm']').submit();});";
-
-				let userid = '${sessionScope.username}';
-				if (userid != '') {
-					$(".nologin-1").replaceWith(loginTag);
-					$(".nologin").remove();
-				}
-
-				var cartlist = '${sessionScope.shoppingcart}';
-				if (cartlist != ""
-						&& '${sessionScope.shoppingcart.totalAmount}' != 0) {
-					const changeCartImg = "<a class='nav-link active' aria-current='page'"
-                        	+ "href='shoppingCartServlet' >"
-							+ "<img src='/test-main/homePageImg/shopping-cart1.png' width='25'  height='25'>"
-							+ "<sup class='badge bg-danger float-end'>${sessionScope.productNumInCart}</sup></a>";
-					$("#cartImg").replaceWith(changeCartImg);
-
-				}
-			</script>
 		</div>
 	</nav>
 	<!-- Modal for login -->
@@ -227,14 +177,10 @@
 		</div>
 	</div>
 	<!--/.modal-->
-	<script>
-	// 將當前URL資訊隨Login form，登入時傳送至controller
-	document.getElementById('loginCurrentUrl').value = window.location;
-	document.getElementById('logoutCurrentUrl').value = window.location;
-	</script>
+	
 	
 	<!--      body div      -->
-	<div class="container-xl">
+	<div class="container-xl" style="min-height: 600px;">
 	
 	<!-- Breadcrumb -->
 	<nav class="pt-3" style=" --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -283,18 +229,7 @@
 		</div>
     	</div>
 	
-	<script>
-	// 結帳
-	$("#checkoutBtn").click(function(){
-	let loginStatus = '${sessionScope.username}';
-	if (loginStatus == ''){
-		alert("請先登入，再進行結帳");
-	}else {
-		location.replace("checkoutServlet");
-	}
-	});
-	
-	</script>
+
 	</div><!-- /.body div -->
 
 	<footer
@@ -319,5 +254,71 @@
 				class="nav-link px-2 text-muted">關於我們</a></li>
 		</ul>
 	</footer>
+	
+<script>
+
+/** nav 標籤相關script **/
+/* 登入成功後，更換標籤元素 */
+let loginTag = "<span class='dropdown'>"
+	+ "<a class='nav-link py-0 dropdown-toggle' data-bs-toggle='dropdown'"
+	+ "href='#' style='color: black;' "
+	+ "onmouseover='turnOnlight(this)' onmouseout='turnOfflight(this)'>"
+	+ "<img src='/test-main/homePageImg/cat0.png' width='15'"
+	+ "height='15'> ${sessionScope.username}</a>"
+	+ "<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>"
+	+ "<li><a class='dropdown-item' href='#'>會員中心</a></li>"
+	+ "<form name='logoutForm' method='POST' action='loginServlet'>"
+	+ "<input type='hidden' name='login' value='false'>"
+	+ "<input type='hidden' id='logoutCurrentUrl' name='loginCurrentUrl'>"
+	+ "<li><button class='btn-custom1 dropdown-item' >登出</button></li>"
+	+ "</form>";
+
+let userid = '${sessionScope.username}';
+if (userid != '') {
+$(".nologin-1").replaceWith(loginTag);
+$(".nologin").remove();
+}
+
+/* 監聽購物車清單，更換購物車圖示 */
+var cartlist = '${sessionScope.shoppingcart}';
+if (cartlist != ""
+	&& '${sessionScope.shoppingcart.totalAmount}' != 0) {
+const changeCartImg = "<a class='nav-link active btn' aria-current='page'"
+    	+ "href='shoppingCartServlet' >"
+		+ "<img src='/test-main/homePageImg/shopping-cart1.png' width='25'  height='25'>"
+		+ "<sup class='badge bg-danger float-end'>${sessionScope.productNumInCart}</sup></a>";
+$("#cartImg").replaceWith(changeCartImg);
+}
+
+
+/* user logout */
+var userLogoutbtn = document.querySelector("form[name='logoutForm'] > button");
+userLogoutbtn.addEventListener("click", function() {
+document.querySelector("form[name='logoutForm']").submit();
+}, false);
+/** nav標籤相關script **/
+
+</script>
+<script>
+
+
+/* 結帳 */
+$("#checkoutBtn").click(function() {
+	let loginStatus = '${sessionScope.username}';
+	if (loginStatus == ''){
+		alert("請先登入，再進行結帳");
+	}else {
+		location.replace("checkoutServlet");
+	}
+});
+
+
+/* 將當前URL資訊隨Login form，登入時傳送至controller */
+document.getElementById('loginCurrentUrl').value = window.location;
+document.getElementById('logoutCurrentUrl').value = window.location;
+
+
+
+</script>
 </body>
 </html>

@@ -20,6 +20,15 @@
   </servlet-mapping>
   
   <servlet>
+	<servlet-name>SearchProductListJSP</servlet-name>
+	<jsp-file>/WEB-INF/view/searchProductList.jsp</jsp-file>  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SearchProductListJSP</servlet-name>
+  	<url-pattern>/searchPage</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
   	<servlet-name>ProductInfoJSP</servlet-name>
   	<jsp-file>/WEB-INF/view/productInfo.jsp</jsp-file>
   </servlet>

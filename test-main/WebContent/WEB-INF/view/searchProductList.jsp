@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -31,21 +31,10 @@
 	width: 300px;
 }
 
-
-/* 動態調整輪播圖高度
-@
-include 
-        media-breakpoint-down(sm) { .carousel-inner { height:600px;
-		}
+/* 關鍵字 */
+.keywordResult {
+	color: red;
 }
-*/
-
-
-/* 輪播圖CSS */
-.carousel-inner {
-	height: 550px;
-}
-
 
 /* Custom button CSS */
 .btn-custom {
@@ -80,7 +69,6 @@ include
 .btn-custom1:focus, .btn-custom.focus {
 	box-shadow: 0 0 0 0rem rgba(0, 0, 0, 0)
 }
-
 </style>
 <script>
 	/* 文字提示效果 */ 
@@ -92,8 +80,8 @@ include
 	}
 </script>
 </head>
-<body>	
-	<nav class="navbar sticky-top navbar-expand-lg navbar-light"
+<body>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light"
 		style="background-color: #e3f2fd;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/test-main"> <img
@@ -133,8 +121,7 @@ include
 				onmouseover="turnOnlight(this)" onmouseout="turnOfflight(this)">賣家中心</a>
 		</div>
 	</nav>
-	
-	<!-- Modal for login -->
+<!-- Modal for login -->
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div
@@ -183,84 +170,58 @@ include
 		</div>
 	</div>
 	<!--/.modal-->
-	
-		
+
 	<!--      body div      -->
 	<div class="container-xl">
-
-
-		<!--    Carousel area : 圖片顯示框大小需要一致   -->
-		<div id="carouselExampleIndicators" class="carousel slide"
-			data-bs-ride="carousel">
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
-					data-bs-slide-to="3" aria-label="Slide 4"></button>
-			</div>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="homePageImg/product/amazon.jpg" class="d-block w-100"
-						alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="homePageImg/product/testla.PNG" class="d-block w-100"
-						alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="homePageImg/product/Source-@brandwithravi-Twitter.png"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="homePageImg/FDKq5_uakAAJhup.png" class="d-block w-100"
-						alt="...">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+		<!-- Breadcrumb -->
+	<nav class="pt-3" style=" --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/test-main">首頁</a></li>
+			<li class="breadcrumb-item active" aria-current="page">搜尋結果</li>
+		</ol>
+		<p>關鍵字: <strong class="keywordResult">${keywordResultList}</strong></p>
+		<p>搜尋結果共: <strong class="keywordResult">${resultNum}</strong> 筆</p>
+    </nav>
+	
+	<c:choose>
+	<c:when test="${resultNum == 0}">
+		<div style="min-height: 600px;">
+			<p class="text-center fs-1 fw-bold text-muted">找不到結果</p>
 		</div>
-
-
-
-		<!-- Three columns of text below the carousel -->
-		<!-- img檔案要規定大小-->
-		<div class="row testdiv pt-3">
-			<c:forEach items="${products}" var="product">
-
-				<div class="col-lg-4">
-					<div class="productImg">
-						<a href="showProductInfo?pnum=${product.id}"><img
-							src="showImage?pnum=${product.id}" class="w-100"></a>
-					</div>
-					<p>${product.name}</p>
-					<h2 class="prices">
-						<fmt:setLocale value="en_US" />
-						<fmt:formatNumber value="${product.price}" type="currency"
-							minFractionDigits="0" />
-					</h2>
-				</div>
-				<!-- /.col-lg-4 -->
-
-			</c:forEach>
-		</div><!-- /.row -->
-	</div>
-	<!-- /.body div -->
-
-
-
+	</c:when>
+	<c:otherwise>
+	<div style="min-height: 600px;">
+	<h1>商品列表</h1>
+	<table class="table table-hover">
+		<tr>
+			<td>名稱</td>
+			<td>價格</td>
+			<td>數量</td>
+			<td>圖片</td>
+			<td>商品描述</td>
+		</tr>
+		<c:forEach var="product" items="${allProducts}">
+		<tr>
+			<td><button class="btn btn-custom" onclick="document.location='showProductInfo?pnum=${product.id}'">${product.name}</button></td>
+			<td class="prices">
+			<fmt:setLocale value = "en_US"/>
+			<fmt:formatNumber value = "${product.price}" 
+			type = "currency" minFractionDigits="0"/>
+			</td>
+			<td>${product.quantity}</td>
+			<td><a href="showProductInfo?pnum=${product.id}">
+			<img src="showImage?pnum=${product.id}" width="300" height="300">
+			</a></td>
+			<td>${product.description}</td>
+		</tr>
+		</c:forEach>
+	</table>
+	</div><!-- /.table div -->
+	</c:otherwise>
+	</c:choose>
+	</div><!-- /.body div -->
+	
+	
 	<footer
 		class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
 		style="background-color: #e3f2fd;">
@@ -281,6 +242,8 @@ include
 				class="nav-link px-2 text-muted">關於我們</a></li>
 		</ul>
 	</footer>
+	
+	
 <script>
 
 /** nav 標籤相關script **/

@@ -59,7 +59,7 @@ include
 </script>
 </head>
 <body>
-<nav class="navbar  sticky-top navbar-expand-lg navbar-light"
+<nav class="navbar sticky-top navbar-expand-lg navbar-light"
 		style="background-color: #e3f2fd;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/test-main"> <img
@@ -77,7 +77,7 @@ include
 			<div class="collapse navbar-collapse" id="navbarNav">
 			
 			<!-- Search Component -->
-				<form class="d-flex" method="get" action="searchProducts">
+				<form class="d-flex" method="GET" action="search">
 					<input class="form-control me-2" type="search"
 						placeholder="輸入商品名稱或關鍵字..." aria-label="Search" size="70" name="keywords">
 					<button class="btn btn-outline-success" type="submit">

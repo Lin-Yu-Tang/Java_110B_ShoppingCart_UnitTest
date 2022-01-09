@@ -29,6 +29,7 @@ public class CheckoutServlet extends HttpServlet {
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("shoppingcart");
 		
 		// prepare parameters requirement
+		System.out.println("結帳: Checkout servlet");
 		System.out.println("USER NAME: " + username);
 		String userId = uServ.getUserId(username);
 		System.out.println("UserID: " + userId);
@@ -36,6 +37,7 @@ public class CheckoutServlet extends HttpServlet {
 		
 		// 結帳 傳入 String userId, String shippingAddress, ShoppingCart cart
 		// 寫入買家table(orders, order_item)、賣家table(product,)
+		
 		boolean checkoutResult = checkoutService.checkout(userId, "楊新路一段1231230", cart);
 
 		// 結帳成功 ? 清空session:返回結帳頁面
@@ -48,6 +50,7 @@ public class CheckoutServlet extends HttpServlet {
 			response.sendRedirect("shoppingCartServlet");
 		}
 		
+
 		
 	}
 

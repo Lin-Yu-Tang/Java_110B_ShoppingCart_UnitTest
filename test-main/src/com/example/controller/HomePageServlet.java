@@ -31,7 +31,6 @@ public class HomePageServlet extends HttpServlet {
 		
 		request.setAttribute("products", products);
 		
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("home");
 		dispatcher.forward(request, response);
 	}

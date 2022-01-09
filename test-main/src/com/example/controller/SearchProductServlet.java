@@ -15,10 +15,10 @@ import com.example.model.Product;
 
 /**
  * @author Tom Lin
- * @apiNote deal with the keywords user submit the navbar search component in pages. 
+ * @apiNote deal with the keywords user submit from the navbar search component in pages. 
  * 		reutrn the result contains products.
  */
-@WebServlet("/searchProducts")
+@WebServlet("/search")
 public class SearchProductServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,10 +28,12 @@ public class SearchProductServlet extends HttpServlet {
 		ProductServiceImpl service = new ProductServiceImpl();
 		
 		String[] keywords = keyword.split(" ");
-		System.out.println("keywords len: " + keywords.length);
+//		System.out.println("keywords len: " + keywords.length);
+		String keywordResult = "";
 		
 		for (String s:keywords) {
 			System.out.println("keywords: " + s);
+			keywordResult += s + " ";
 		}
 		
 		// data access
@@ -43,8 +45,9 @@ public class SearchProductServlet extends HttpServlet {
 		
 		// set attribute
 		request.setAttribute("allProducts", products);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("searchProductList.jsp");
+		request.setAttribute("keywordResultList", keywordResult);
+		request.setAttribute("resultNum", products.size());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("searchPage");
 		
 		dispatcher.forward(request, response);
 		
