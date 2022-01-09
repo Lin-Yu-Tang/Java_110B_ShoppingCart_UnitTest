@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 import com.example.model.User;
 
+/**
+ * @author 柯孟言
+ * @apiNote 使用者登入相關服務之實作
+ */
 public class UserServiceImpl implements UserService {
 	String DB_URL = "jdbc:mysql://localhost:3306/shopping-cart-test?serverTimezone=UTC&useSSL=false";
 	String USER = "root";

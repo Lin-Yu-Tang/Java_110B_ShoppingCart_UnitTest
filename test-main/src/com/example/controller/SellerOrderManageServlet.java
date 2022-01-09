@@ -14,7 +14,8 @@ import com.example.dao.SellerServiceImpl;
 import com.example.model.SellerOrder;
 
 /**
- * Servlet implementation class SellerOrderManageServlet
+ * @author Tom Lin
+ * @apiNote 賣家登入轉址
  */
 @WebServlet("/seller/order")
 public class SellerOrderManageServlet extends HttpServlet {
@@ -27,8 +28,9 @@ public class SellerOrderManageServlet extends HttpServlet {
 		System.out.println("seller/order page");
 		String SID = (String) session.getAttribute("sellername");
 		
-		System.out.println("SID: " + SID);
+//		System.out.println("SID: " + SID);
 		
+		// 確認session
 		if (SID != null) {
 			String sellerId = service.getSellerId(SID);
 			

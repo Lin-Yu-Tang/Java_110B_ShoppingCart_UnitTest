@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="author" content="Tom Lin">
 <meta charset="UTF-8">
+<meta name="author" content="Tom Lin">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache, no-store">
 <meta http-equiv="expires" content="0">

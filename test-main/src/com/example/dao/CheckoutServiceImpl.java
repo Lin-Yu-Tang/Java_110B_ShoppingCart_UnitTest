@@ -16,6 +16,10 @@ import com.example.model.Product;
 import com.example.model.SellerOrderItem;
 import com.example.model.ShoppingCart;
 
+/**
+ * @author Tom Lin
+ * @apiNote 實作結帳方法
+ */
 public class CheckoutServiceImpl implements CheckoutService {
 	// 資料庫內容
 	private final String DB_URL = "jdbc:mysql://localhost:3306/shopping-cart-test?useSSL=false";

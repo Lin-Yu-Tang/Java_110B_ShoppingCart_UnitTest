@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="author" content="Tom Lin">
 <meta charset="UTF-8">
+<meta name="author" content="Tom Lin">
 <title>Insert title here</title>
 </head>
 <body>

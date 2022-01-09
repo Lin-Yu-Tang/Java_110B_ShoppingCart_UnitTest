@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="author" content="Tom Lin">
+<title>狗狗商城</title>
+
 </head>
 <body>
 	<h1>目前購物車沒有東西哦~~</h1>

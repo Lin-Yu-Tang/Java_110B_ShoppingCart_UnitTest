@@ -1,5 +1,7 @@
 # 購物商城網站說明
 
+簡易系統架構與分工:
+[google雲端連結](https://docs.google.com/spreadsheets/d/165SBfQxAL9NedaIH8Iv0hRMRgkTp4M0v5FLuNoSXz4Y/edit?usp=sharing)
 
 ## shopping-cart-project-html
 首頁版型

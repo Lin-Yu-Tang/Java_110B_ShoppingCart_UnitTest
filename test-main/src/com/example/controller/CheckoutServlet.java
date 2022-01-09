@@ -13,7 +13,8 @@ import com.example.dao.UserServiceImpl;
 import com.example.model.ShoppingCart;
 
 /**
- * Servlet implementation class CheckoutServlet
+ * @author Tom Lin
+ * @apiNote 結帳頁面
  */
 @WebServlet("/checkoutServlet")
 public class CheckoutServlet extends HttpServlet {

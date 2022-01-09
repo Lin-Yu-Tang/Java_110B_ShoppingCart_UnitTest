@@ -5,6 +5,10 @@ import java.util.HashMap;
 
 import com.example.model.Product;
 
+/**
+ * @author Tom Lin
+ * @apiNote 定義商品管理/查詢相關方法
+ */
 public interface ProductService {
 	
 	public void saveProduct(Product product);

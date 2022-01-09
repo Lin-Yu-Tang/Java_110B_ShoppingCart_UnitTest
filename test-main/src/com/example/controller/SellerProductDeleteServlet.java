@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.example.dao.ProductServiceImpl;
 
 /**
- * Servlet implementation class SellerProductDeleteServlet
+ * @author Tom Lin
+ * @apiNote 接收刪除商品請求
  */
 @WebServlet("/seller/delete")
 public class SellerProductDeleteServlet extends HttpServlet {
@@ -21,7 +22,7 @@ public class SellerProductDeleteServlet extends HttpServlet {
 		
 		String PID = request.getParameter("pid");
 		
-		System.out.println("delete product, id = " + PID);
+//		System.out.println("delete product, id = " + PID);
 		
 		ProductServiceImpl service = new ProductServiceImpl();
 		service.deleteProdct(PID);

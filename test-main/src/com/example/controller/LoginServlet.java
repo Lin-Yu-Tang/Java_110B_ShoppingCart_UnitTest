@@ -15,7 +15,8 @@ import com.example.dao.UserServiceImpl;
 import com.example.model.User;
 
 /**
- * Servlet implementation class LoginServlet
+ * @author 柯孟言
+ * @apiNote 使用者登入驗證
  */
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {

@@ -72,7 +72,7 @@ shoppingCart.jsp點選結帳 -> CheckoutServlet
 sellerManage.jsp -> 
 
 SellerProductCreateServlet -> productManageCreate.jsp (新增), 
-SellerProductUpdateServlet -> productManageUpdate.jsp (修改), 
+SellerProductUpdateServlet -> productManageUpdate.jsp (修改與刪除), 
 SellerReadServlet -> productManageRead.jsp (瀏覽與刪除)
 
 
@@ -83,7 +83,6 @@ Note:
 	2. 編輯商品: 
 	* sellerManage.jsp (update) -> SellerProductUpdateServlet -> productManageUpdate.jsp
 	* productManageRead.jsp 點選個別商品操作按鈕 -> SellerProductUpdateServlet -> productManageUpdate.jsp
-2. 新增
 
 
 

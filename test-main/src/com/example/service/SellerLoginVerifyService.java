@@ -2,9 +2,11 @@ package com.example.service;
 
 import com.example.dao.SellerServiceImpl;
 
+/**
+ * @author Tom Lin
+ * @apiNote 賣家登入驗證專用
+ */
 public class SellerLoginVerifyService {
-	
-	
 	
 	/**
 	 * 登入驗證

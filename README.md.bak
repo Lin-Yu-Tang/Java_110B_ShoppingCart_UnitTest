@@ -23,7 +23,6 @@ import java.sql.*;
  * @apiNote 文件大綱
  */
 public class HelloWorld {
-....
 ```
 2. .jsp/.html文件註解範例:
 ```html=
