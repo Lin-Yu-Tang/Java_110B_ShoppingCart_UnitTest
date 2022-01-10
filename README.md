@@ -3,11 +3,9 @@
 簡易系統架構與分工:
 [google雲端連結](https://docs.google.com/spreadsheets/d/165SBfQxAL9NedaIH8Iv0hRMRgkTp4M0v5FLuNoSXz4Y/edit?usp=sharing)
 
-## shopping-cart-project-html
-首頁版型
 
 ## test-main
-賣家商品管理系統
+線上購物網站主系統，功能請參考上方google雲端連結；細部功能說明請參考/test-main/README.md
 
 
 ## 文件撰寫規範
