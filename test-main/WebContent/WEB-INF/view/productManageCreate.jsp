@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-auto">
 						<input type="text" id="new-product-name" class="form-control"
-							name="name">
+							name="name" size="50">
 					</div>
 				</div>
 

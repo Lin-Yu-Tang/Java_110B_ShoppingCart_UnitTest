@@ -33,6 +33,24 @@ public class LoginServlet extends HttpServlet {
 		for(int i=3;i<split.length;i++) {
 			rebuiltURL +="/"+ split[i];
 		}
+		
+		// 去除request param
+		String res = "";
+		if (rebuiltURL.contains("?")) {
+			
+			int indx = -1;
+			for (int i = 0; i < rebuiltURL.length(); i++) {
+				char c = rebuiltURL.charAt(i);
+				if (c == '?') {
+					indx = i;
+					break;
+				}
+			}
+			if (indx != -1) {
+				res = rebuiltURL.substring(0,indx);
+			}
+		}
+		
 		System.out.println("URL: " + rebuiltURL);
 		
 		String username = request.getParameter("username");
@@ -60,7 +78,12 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		// 登入程序結束返回當前頁面
-		response.sendRedirect(rebuiltURL);
+		if (!res.equals("")) {
+			response.sendRedirect(res);
+		}else {
+			response.sendRedirect(rebuiltURL);
+		}
+		
 
 	}
 }
