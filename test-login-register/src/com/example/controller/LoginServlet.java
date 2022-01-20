@@ -27,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 	}
 
 	/**
@@ -42,17 +41,11 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 
 		String password = request.getParameter("password");
-		User user = new User();
-
-		user.setUsername(username);
-		user.setPassword(password);
+	
+		
 		UserServiceImpl userDao = new UserServiceImpl();
 
-		String dbusername = userDao.selectusername(username).toString();// 抓資料庫username
-//		String dbuserpassword=userDao.selectusername(password).toString();
-
-		String login = request.getParameter("login");
-		System.out.println("[action] user is login: " + login);
+	
 
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(7 * 24 * 60 * 60);
@@ -63,13 +56,13 @@ public class LoginServlet extends HttpServlet {
 
 			String autologin = request.getParameter("autologin");
 
-			if ("auto".equals(autologin)) {
+			if ("auto".equals(autologin)) { // 判斷有沒有勾選自動登入
 
-				Cookie cookie = new Cookie(autokey111, "歡迎!!");
+				Cookie cookie = new Cookie(autokey111, "歡迎"); // new cookie
 				cookie.setMaxAge(60);
 				response.addCookie(cookie);
-
-				response.sendRedirect("LoginCookieServlet");
+		//		request.getRequestDispatcher("LoginCookieServlet").forward(request, response);
+				response.sendRedirect("LoginCookieServlet"); //轉向判斷cookie是否存在
 			} else {
 				response.sendRedirect("homePage.jsp");
 			}

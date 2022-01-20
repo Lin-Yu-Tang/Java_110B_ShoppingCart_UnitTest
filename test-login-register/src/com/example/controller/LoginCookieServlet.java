@@ -17,20 +17,7 @@ import com.example.model.User;
  */
 @WebServlet("/LoginCookieServlet")
 public class LoginCookieServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginCookieServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -45,7 +32,7 @@ public class LoginCookieServlet extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
-		Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies(); 
 
 		
 		if (cookies != null) {
@@ -54,9 +41,9 @@ public class LoginCookieServlet extends HttpServlet {
 				if (cookie.getName() != null && cookie.getValue() != null) {
 					String name = cookie.getName();
 					String value = cookie.getValue();
-					String autokey111 = "autokey111";
+					String autokey111 = "autokey111";  //cookie 名稱
 					
-					if (autokey111.equals(name) && username.equals(value)) { //若放username 取不到值 
+					if (autokey111.equals(name) && ("歡迎").equals(value)) { //若放username 取不到值 
 						session.setAttribute("username", value);
 						request.getRequestDispatcher("homePage.jsp").forward(request, response);
 						return;

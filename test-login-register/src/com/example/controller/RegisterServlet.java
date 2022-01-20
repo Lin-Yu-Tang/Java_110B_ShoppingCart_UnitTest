@@ -31,11 +31,11 @@ public class RegisterServlet extends HttpServlet {
 		
 		if (userDao.userIsCheck(username)) {				//ajax 的回應用GET
 
-			response.getWriter().write("帳戶已重複");
+			response.getWriter().write("<i class=\"fa fa-remove\"></i>");
 
 		} else {
 			userDao.RegisterUser(user);
-			response.getWriter().write("帳戶無人使用");
+			response.getWriter().write("<i class=\"fa fa-check\"></i>");
 		}
 
 	}

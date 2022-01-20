@@ -95,7 +95,7 @@ include
                     src="/test-main/homePageImg/shopping-cart.png" width="25"
                     height="25"></a>
 
-                <a class="nav-link py-0 nologin-1" href="#"
+                <a class="nav-link py-0 nologin-1" href="register.jsp"
                     style="color: black;" onmouseover="turnOnlight(this)"
                     onmouseout="turnOfflight(this)">註冊</a>
                 <span class="p-0 nologin"> | </span>

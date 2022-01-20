@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Ke-Meng-Yen">
+<link rel="stylesheet" href="./css/style.css">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <script type="text/javascript">
 	function isValid(form) {
 		var x = /^\w{6,12}$/;
@@ -44,7 +46,7 @@
 	            if(xmlHTTP.status == 200)
 	            {
 	                var str=xmlHTTP.responseText;
-	                document.getElementById("show").innerHTML="<h1>"+str+"</h1>";
+	                document.getElementById("show").innerHTML="<h3>"+str+"<h3>";
 	            }
 	        }
 	    }
@@ -56,44 +58,36 @@
 <body>
 
 	<div>
-		<form action="UserServlet" method="post"
+		<form action="UserServlet" class="register" method="post"
 			onSubmit="return isValid(this);">
-			<h2>註冊</h2>
+			<h1>註冊</h1>
+			<p  class="fa fa-user-circle-o"></p>
+			<br>	
+			
+			<h3 >帳號</h3>
+			<h3 id="show"></h3>
+			<input id="username" type="text" name="username" onblur="check()">
+			<br>	
+			
+			<h3>密碼</h3>
+			<input type="password" name="password" placeholder="" />
+			<br>	
+			<h3>信箱</h3>
+			<input type="text" name="email" placeholder="" />
+			<br>	
+			<h3>手機號碼</h3>
+			<input type="text" name="phone_number"
+						placeholder="" />
+						<br>	
+			<h3>地址</h3>
+			<input type="text" name="address" />
+			<br>	
+			<tr>
+				<td colspan="2"><input type="submit" value="註冊" /></td>
+				<td><a href="login.jsp " style="color: azure;">返回</td>
+			</tr>
 
-			<table>
-				<tr>
-					<td>帳號:</td>
-					<td><input id="username" type="text" name="username" onblur="check()"> </td>
-				</tr>
-				<br>
-				<tr>
-					<td>密碼:</td>
-					<td><input type="password" name="password" placeholder="" /></td>
-				</tr>
-				<tr>
-					<td>信箱:</td>
-					<td><input type="text" name="email" placeholder="請輸入信箱" /></td>
-				</tr>
-				<tr>
-					<td>手機號碼:</td>
-					<td><input type="text" name="phone_number"
-						placeholder="請輸入手機號碼" /></td>
-				</tr>
-				<tr>
-					<td>地址:</td>
-					<td><input type="text" name="address" /></td>
-				</tr>
-				<tr>
-					<td>照片:</td>
-					<td><input type="file" name="picture" /></td>
-				</tr>
-
-
-				<tr>
-					<td colspan="2"><input type="submit" value="註冊" /></td>
-					<td><a href="login.jsp">返回</td>
-				</tr>
-			</table>
+			
 
 
 		</form>
@@ -102,6 +96,6 @@
 	</div>
 
 	
-	<div id="show"></div>
+	
 </body>
 </html>

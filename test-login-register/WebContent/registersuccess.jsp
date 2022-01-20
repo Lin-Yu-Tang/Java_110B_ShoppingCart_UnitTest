@@ -4,14 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Ke-Meng-Yen">
+<link rel="stylesheet" href="./css/style.css">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
 </head>
 <body>
 <div>
-<form action="" method="post">
-<h2>註冊成功!!</h2>
-
-<a href="login.jsp">返回登入畫面</a>
+<form action="" class="login" method="post">
+<h2>謝謝您!已加入會員</h2>
+<i class="fa fa-handshake-o"></i>
+<br>
+<a href="login.jsp" style="color:azure">返回登入畫面</a>
 
 
 </div>
